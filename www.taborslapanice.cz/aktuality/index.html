@@ -24,11 +24,13 @@ body.l.wt-page {
   background: white !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  transition: transform 0.3s ease-in-out !important;
-  transform: translateY(0) !important;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 .l-h.hidden {
-  transform: translateY(-100%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 .wnd-page {
   padding-top: 200px !important;
