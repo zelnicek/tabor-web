@@ -67,11 +67,25 @@ body.l.wt-blogpost {
   }
   .l-h {
     max-height: 80px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+  }
+  .l-h.menu-open {
+    max-height: 100vh !important;
+    overflow-y: auto !important;
   }
   #menu {
     max-height: calc(100vh - 80px) !important;
     overflow-y: auto !important;
+  }
+  #menu-slider {
+    position: fixed !important;
+    top: 80px !important;
+    left: 0 !important;
+    right: 0 !important;
+    max-height: calc(100vh - 80px) !important;
+    overflow-y: auto !important;
+    background: white !important;
+    z-index: 9999 !important;
   }
 }
 </style><style>.dots li::before { content: "" !important; }</style></head>

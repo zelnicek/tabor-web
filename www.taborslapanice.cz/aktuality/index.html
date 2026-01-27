@@ -63,11 +63,25 @@ body.l.wt-page {
   }
   .l-h {
     max-height: 80px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+  }
+  .l-h.menu-open {
+    max-height: 100vh !important;
+    overflow-y: auto !important;
   }
   #menu {
     max-height: calc(100vh - 80px) !important;
     overflow-y: auto !important;
+  }
+  #menu-slider {
+    position: fixed !important;
+    top: 80px !important;
+    left: 0 !important;
+    right: 0 !important;
+    max-height: calc(100vh - 80px) !important;
+    overflow-y: auto !important;
+    background: white !important;
+    z-index: 9999 !important;
   }
 }
 </style><meta name="description" content="Aktuality"><meta name="keywords" content=""><meta name="generator" content="Webnode 2"><meta name="apple-mobile-web-app-capable" content="no"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no">
@@ -125,7 +139,8 @@ body.l.wt-page {
 			</div>
 		</div>
 	</div>
-<section data-space="true" class="s s-hn s-hn-default wnd-mt-classic wnd-na-c logo-classic sc-w wnd-w-wide wnd-nh-m hm-hidden wnd-nav-border wnd-nav-sticky menu-delimiters-slash" style="position: sticky; top: 0; z-index: 9999; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">	<div class="s-w">
+</section><section data-space="true" class="s s-hn s-hn-default wnd-mt-classic wnd-na-c logo-classic sc-w wnd-w-wide wnd-nh-m hm-hidden wnd-nav-border wnd-nav-sticky menu-delimiters-slash" style="position: sticky; top: 0; z-index: 9999; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+	<div class="s-w">
 		<div class="s-o">
 
 			<div class="s-bg">
@@ -142,11 +157,11 @@ body.l.wt-page {
 						<div class="logo-block">
 							<div class="b b-l logo logo-color-text logo-nb quicksand logo-21 wnd-logo-with-text wnd-iar-1-1 b-ls-l" id="wnd_LogoBlock_772130546" data-wnd_mvc_type="wnd.fe.LogoBlock">
 	<div class="b-l-c logo-content">
-		<a class="b-l-link logo-link" href="../home/index.html">
+		
 
 			<div class="b-l-image logo-image">
     <div class="b-l-image-w logo-image-cell">
-        <img src="../../464c617437.clvaw-cdnwnd.com/9eacbd4206c522c4a6feddc3367114de/200000031-aef4aaef4c/screenshot%202022-02-26%20at%200.07.46cfbe.png" alt="Logo" style="max-height: 80px; width: auto; margin-right: 15px;">
+        <img src="../../464c617437.clvaw-cdnwnd.com/9eacbd4206c522c4a6feddc3367114de/200000031-aef4aaef4c/screenshot 2022-02-26 at 0.07.46cfbe.png" alt="Logo" style="max-height: 80px; width: auto; margin-right: 10px;">
     </div>
 </div>
 
@@ -160,7 +175,7 @@ body.l.wt-page {
 				</div>
 			</div>
 
-		</a>
+		
 	</div>
 </div>
 						</div>
