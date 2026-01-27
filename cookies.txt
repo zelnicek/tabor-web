@@ -1,0 +1,5 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+taborslapanice.cz	TRUE	/	FALSE	1999999999	PHPSESSID	6gcdgkfhqv0ci4bvd5946cu2lf
+www.taborslapanice.cz	TRUE	/	FALSE	1999999999	SameSite	Lax
+
