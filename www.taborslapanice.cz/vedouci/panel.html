@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html class="no-js" prefix="og: https://ogp.me/ns#" lang="cs">
+<head><link rel="preconnect" href="https://duyn491kcolsw.cloudfront.net/" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><meta charset="utf-8">
+<link rel="icon" href="../favicon.png" type="image/png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vedoucí - Admin panel :: tábor šlapanických divadelníků</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <link href="../../duyn491kcolsw.cloudfront.net/files/0r/0rk/0rklmmcfbe.css?ph=464c617437" media="print" rel="stylesheet">
+    <link href="../../duyn491kcolsw.cloudfront.net/files/2e/2e5/2e5qghcfbe.css?ph=464c617437" media="screen and (min-width:100000em)" rel="stylesheet" data-type="cq" disabled>
+    <link rel="stylesheet" href="../../duyn491kcolsw.cloudfront.net/files/41/41k/41kc5icfbe.css?ph=464c617437"><link rel="stylesheet" href="../../duyn491kcolsw.cloudfront.net/files/3b/3b2/3b2e8ecfbe.css?ph=464c617437" media="screen and (min-width:37.5em)"><link rel="stylesheet" href="../../duyn491kcolsw.cloudfront.net/files/3i/3ik/3ikbm2cfbe.css?ph=464c617437" data-wnd_color_scheme_file=""><link rel="stylesheet" href="../../duyn491kcolsw.cloudfront.net/files/39/39q/39qewdcfbe.css?ph=464c617437" data-wnd_color_scheme_desktop_file="" media="screen and (min-width:37.5em)" disabled=""><link rel="stylesheet" href="../../duyn491kcolsw.cloudfront.net/files/33/33z/33ze4kcfbe.css?ph=464c617437" data-wnd_additive_color_file=""><link rel="stylesheet" href="../../duyn491kcolsw.cloudfront.net/files/28/28l/28lqrycfbe.css?ph=464c617437" data-wnd_typography_file=""><link rel="stylesheet" href="../../duyn491kcolsw.cloudfront.net/files/1u/1uz/1uzze2cfbe.css?ph=464c617437" data-wnd_typography_desktop_file="" media="screen and (min-width:37.5em)" disabled=""><script>(()=>{let e=!1;const t=()=>{if(!e&&window.innerWidth>=600){for(let e=0,t=document.querySelectorAll('head > link[href*="css"][media="screen and (min-width:37.5em)"]');e<t.length;e++)t[e].removeAttribute("disabled");e=!0}};t(),window.addEventListener("resize",t),"container"in document.documentElement.style||fetch(document.querySelector('head > link[data-type="cq"]').getAttribute("href")).then((e=>{e.text().then((e=>{const t=document.createElement("style");document.head.appendChild(t),t.appendChild(document.createTextNode(e)),import("../../duyn491kcolsw.cloudfront.net/client/js.polyfill/container-query-polyfill.modern.js").then((()=>{let e=setInterval((function(){document.body&&(document.body.classList.add("cq-polyfill-loaded"),clearInterval(e))}),100)}))}))}))})()</script>
+<link rel="preload stylesheet" href="../../duyn491kcolsw.cloudfront.net/files/2m/2m8/2m8msccfbe.css?ph=464c617437" as="style"><meta name="robots" content="noindex,nofollow"><style>
+body.l.wt-page {
+  padding-top: 0 !important;
+}
+.l-h {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 10000 !important;
+  background: white !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.l-h.hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.wnd-page {
+  padding-top: 200px !important;
+}
+
+/* Mobile responsivní opravy pro menu */
+@media screen and (max-width: 768px) {
+  .wnd-page {
+    padding-top: 140px !important;
+  }
+  .l-h {
+    max-height: 100vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .wnd-page {
+    padding-top: 120px !important;
+  }
+  #menu {
+    max-height: calc(100vh - 80px) !important;
+    overflow-y: auto !important;
+  }
+  .s-hb-c, .menu-nav {
+    padding: 0 !important;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .wnd-page {
+    padding-top: 80px !important;
+  }
+  .l-h {
+    max-height: 80px !important;
+    overflow: visible !important;
+  }
+  .l-h.menu-open {
+    max-height: 100vh !important;
+    overflow-y: auto !important;
+  }
+  #menu {
+    max-height: calc(100vh - 80px) !important;
+    overflow-y: auto !important;
+  }
+  #menu-slider {
+    position: fixed !important;
+    top: 80px !important;
+    left: 0 !important;
+    right: 0 !important;
+    max-height: calc(100vh - 80px) !important;
+    overflow-y: auto !important;
+    background: white !important;
+    z-index: 9999 !important;
+  }
+}
+
+/* Panel styling */
+.admin-panel {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 2px solid #40916c;
+  background: #f9f9f9;
+  border-radius: 8px 8px 0 0;
+}
+
+.panel-header h1 {
+  color: #2d6a4f;
+  margin: 0;
+}
+
+.panel-header > div:first-child {
+  flex: 1;
+}
+
+.user-info {
+  color: #666;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.logout-btn {
+  background: #d63031;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+  white-space: nowrap;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  background: #c12121;
+}
+
+.sidebar-buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 20px 30px;
+  background: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar-btn {
+  background: white;
+  border: 2px solid #ddd;
+  padding: 12px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 45px;
+}
+
+.sidebar-btn:hover {
+  border-color: #40916c;
+  background: #f9f9f9;
+}
+
+.sidebar-btn.active {
+  background: #40916c;
+  color: white;
+  border-color: #2d6a4f;
+}
+
+.panel-content {
+  padding: 30px;
+  flex: 1;
+}
+
+.section {
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  color: #40916c;
+  border-left: 4px solid #40916c;
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+
+.content-box {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.welcome-message {
+  background: #e8f7ec;
+  border-left: 4px solid #40916c;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.editable-section {
+  display: none;
+}
+
+.editable-section.active {
+  display: block;
+}
+
+.editable-content {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.editable-content textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  resize: vertical;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #40916c, #2d6a4f);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(64, 145, 108, 0.3);
+}
+
+.cancel-btn {
+  background: #ddd;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.cancel-btn:hover {
+  transform: translateY(-2px);
+  background: #ccc;
+}
+
+.edit-btn {
+  background: #40916c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+  float: right;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+}
+
+.view-mode {
+  background: white;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.view-mode p {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.success-message {
+  background: #d4edda;
+  border-left: 4px solid #28a745;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  color: #155724;
+  display: none;
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .sidebar-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .logout-btn {
+    align-self: flex-end;
+  }
+  
+  .sidebar-buttons {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 15px;
+  }
+  
+  .sidebar-btn {
+    padding: 10px;
+    font-size: 12px;
+    min-height: 40px;
+  }
+  
+  .panel-content {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .sidebar-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 10px;
+  }
+  
+  .sidebar-btn {
+    padding: 8px;
+    font-size: 11px;
+    min-height: 35px;
+  }
+  
+  .panel-content {
+    padding: 15px;
+  }
+  
+  .section h2 {
+    font-size: 16px;
+  }
+}
+</style></head>
+<body class="l wt-page ac-i ac-n l-default l-d-border b-btn-r b-btn-s-l b-btn-dso b-btn-bw-1 img-d-r img-t-u img-h-n line-solid b-e-ds lbox-l   hb-on wnd-free-bar-limited  wnd-fe">
+
+<div class="wnd-page l-page cs-fiord ac-danube t-t-fs-m t-t-fw-s t-t-sp-n t-t-d-n t-s-fs-s t-s-fw-s t-s-sp-n t-s-d-n t-p-fs-s t-p-fw-s t-p-sp-n t-h-fs-m t-h-fw-s t-h-sp-n t-bq-fs-s t-bq-fw-s t-bq-sp-n t-bq-d-l t-btn-fw-l t-nav-fw-l t-pd-fw-l t-nav-tt-n">
+    <div class="l-w t cf t-14">
+        <div class="l-bg cf">
+            <div class="s-bg-l">
+                
+                
+            </div>
+        </div>
+        <header class="l-h cf">
+            <div class="sw cf">
+	<div class="sw-c cf"><section class="s s-hb cf sc-w   wnd-w-wide wnd-hbs-on">
+	<div class="s-w cf">
+		<div class="s-o cf">
+			<div class="s-bg cf">
+                <div class="s-bg-l">
+                    
+                    
+                </div>
+			</div>
+			<div class="s-c">
+                <div class="s-hb-c cf" style="display: flex !important; width: 100% !important; align-items: center; justify-content: space-between; padding: 0;">
+    <div style="flex-grow: 1;"></div>
+    <div class="hb-si" style="flex-shrink: 0;">
+        <div class="si">
+            <div class="si-c">
+                <a href="https://www.facebook.com/groups/157604047617778" target="_blank" rel="noreferrer" title="Facebook">
+                    <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" height="18px" width="18px"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="#bebebe"></path></svg>
+                </a>
+                <a href="https://www.instagram.com/tabor__slapanice/?hl=cs" target="_blank" rel="noreferrer" title="Instagram">
+                    <svg viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg" height="18px" width="18px"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913a5.885 5.885 0 001.384 2.126A5.868 5.868 0 004.14 23.37c.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.148.558a5.898 5.898 0 002.126-1.384 5.86 5.86 0 001.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913a5.89 5.89 0 00-1.384-2.126A5.847 5.847 0 0019.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227a3.81 3.81 0 01-.899 1.382 3.744 3.744 0 01-1.38.896c-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421a3.716 3.716 0 01-1.379-.899 3.644 3.644 0 01-.9-1.38c-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03z" fill="#bebebe"></path></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+			</div>
+		</div>
+	</div>
+</section><section data-space="true" class="s s-hn s-hn-default wnd-mt-classic wnd-na-c logo-classic sc-w wnd-w-wide wnd-nh-m hm-hidden wnd-nav-border wnd-nav-sticky menu-delimiters-slash" style="position: sticky; top: 0; z-index: 9999; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+	<div class="s-w">
+		<div class="s-o">
+			<div class="s-bg">
+                <div class="s-bg-l">
+                    
+                    
+                </div>
+			</div>
+			<div class="h-w h-f wnd-fixed">
+				<div class="n-l">
+					<div class="s-c menu-nav">
+						<div class="logo-block">
+							<div class="b b-l logo logo-color-text logo-nb quicksand logo-21 wnd-logo-with-text wnd-iar-1-1 b-ls-l" id="wnd_LogoBlock_772130546" data-wnd_mvc_type="wnd.fe.LogoBlock">
+	<div class="b-l-c logo-content">
+		<div class="b-l-image logo-image">
+    <div class="b-l-image-w logo-image-cell">
+        <img src="../favicon.png" alt="Logo" style="max-height: 80px; width: auto; margin-right: 10px;">
+    </div>
+</div>
+			<div class="b-l-br logo-br"></div>
+			<div class="b-l-text logo-text-wrapper">
+				<div class="b-l-text-w logo-text">
+					<span class="b-l-text-c logo-text-cell"><strong>Tábor šlapanických divadelníků</strong></span>
+				</div>
+			</div>
+	</div>
+</div>
+						</div>
+						<div id="menu-slider">
+							<div id="menu-block">
+								<nav id="menu"><div class="menu-font menu-wrapper">
+	<a href="#" class="menu-close" rel="nofollow" title="Close Menu"></a>
+	<ul role="menubar" aria-label="Menu" class="level-1">
+		<li role="none">
+			<a class="menu-item" role="menuitem" href="../index.html"><span class="menu-item-text">Úvod</span></a>
+		</li><li role="none">
+			<a class="menu-item" role="menuitem" href="../o-nas/index.html"><span class="menu-item-text">O nás</span></a>
+		</li><li role="none">
+			<a class="menu-item" role="menuitem" href="../aktuality/index.html"><span class="menu-item-text">Aktuality</span></a>
+		</li><li role="none">
+			<a class="menu-item" role="menuitem" href="../index/index.html"><span class="menu-item-text">Tábor 2026</span></a>
+		</li><li role="none">
+			<a class="menu-item" role="menuitem" href="../ke-stazeni/index.html"><span class="menu-item-text">Ke stažení</span></a>
+		</li><li role="none">
+			<a class="menu-item" role="menuitem" href="../fotogalerie/index.html"><span class="menu-item-text">Fotogalerie</span></a>
+		</li><li role="none">
+			<a class="menu-item" role="menuitem" href="../kontakt/index.html"><span class="menu-item-text">Kontakt</span></a>
+		</li><li role="none" class="wnd-active">
+			<a class="menu-item" role="menuitem" href="index.html"><span class="menu-item-text">🔐 Vedoucí</span></a>
+		</li>
+	</ul>
+	<span class="more-text">Více</span>
+</div></nav>
+							</div>
+						</div>
+						<div class="cart-and-mobile">
+							<div id="menu-mobile">
+								<a href="#" id="menu-submit"><span></span>Menu</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section></div>
+</div>
+        </header>
+        <main class="l-m cf">
+            <div class="sw cf">
+	<div class="sw-c cf">
+	<section class="s s-basic cf sc-w wnd-w-wide wnd-s-normal wnd-h-auto">
+	<div class="s-w cf">
+		<div class="s-o s-fs cf">
+			<div class="s-bg cf">
+				<div class="s-bg-l">
+                    
+				</div>
+			</div>
+			<div class="s-c s-fs cf">
+				<div class="admin-panel">
+					<div class="panel-header">
+						<div>
+							<h1>🎭 Vedoucí Panel</h1>
+							<div id="welcoming" class="user-info"></div>
+						</div>
+						<button class="logout-btn" onclick="logout()">Odhlásit se</button>
+					</div>
+
+					<div class="sidebar-buttons">
+						<button class="sidebar-btn active" onclick="switchSection('things')">📦 Věci u Kači</button>
+						<button class="sidebar-btn" onclick="switchSection('roles')">👥 Kdo je jaká role</button>
+						<button class="sidebar-btn" onclick="switchSection('schedule')">📅 Rozvrh</button>
+						<button class="sidebar-btn" onclick="switchSection('notes')">📝 Poznámky</button>
+						<a href="https://drive.google.com/drive/folders/1XxwXZBY1pOoUafPErjgcEahZ1Ui290iX?usp=drive_link" target="_blank" class="sidebar-btn" style="text-decoration: none;">📁 Disk</a>
+					</div>
+
+					<div class="panel-content">
+						<!-- Věci u Kači Section -->
+						<div id="things" class="editable-section active">
+							<div class="section">
+								<h2>📦 Věci u Kači</h2>
+								<div class="editable-content">
+									<div style="display: flex; gap: 10px; margin-bottom: 15px;">
+										<input type="text" id="thingsInput" placeholder="Napiš novou věc..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+										<button class="save-btn" onclick="addThing()" style="padding: 10px 15px;">+ Přidat</button>
+									</div>
+									<ul id="thingsList" style="list-style: none; padding: 0; margin: 0;">
+										<li style="color: #999; text-align: center; padding: 20px;">Zatím nejsou přidány žádné věci. Přidej první!</li>
+									</ul>
+								</div>
+								<div class="success-message" id="thingsSuccess">Věci úspěšně uloženy!</div>
+							</div>
+						</div>
+
+						<!-- Kdo je jaká role Section -->
+						<div id="roles" class="editable-section">
+							<div class="section">
+								<h2>👥 Kdo je jaká role</h2>
+								<div class="view-mode" id="rolesView">
+									<p style="color: #999;">Zatím nic není uloženo. Klikni na Upravit a přidej role.</p>
+								</div>
+								<button class="edit-btn" onclick="editRoles()">Upravit</button>
+								<div style="clear: both;"></div>
+								
+								<div id="rolesEdit" class="editable-content" style="display: none;">
+									<textarea id="rolesContent" placeholder="Napiš role a přiřazení vedoucích..."></textarea>
+									<div class="button-group" style="margin-top: 10px;">
+										<button class="save-btn" onclick="saveRoles()">Uložit</button>
+										<button class="cancel-btn" onclick="cancelEditRoles()">Zrušit</button>
+									</div>
+								</div>
+								<div class="success-message" id="rolesSuccess">Role úspěšně uloženy!</div>
+							</div>
+						</div>
+
+						<!-- Rozvrh a plánování Section -->
+						<div id="schedule" class="editable-section">
+							<div class="section">
+								<h2>📅 Rozvrh a plánování</h2>
+								<div class="content-box">
+									Sekce pro plánování programu a rozvrhu. Více informací brzy...
+								</div>
+							</div>
+						</div>
+
+						<!-- Vlastní poznámky Section -->
+						<div id="notes" class="editable-section">
+							<div class="section">
+								<h2>📝 Vlastní poznámky</h2>
+								<div class="editable-content">
+									<textarea id="notesContent" class="notes-area" placeholder="Napiš si své poznámky a nápady..."></textarea>
+									<button class="save-btn" onclick="saveNotes()">Uložit poznámky</button>
+								</div>
+								<div class="success-message" id="notesSuccess">Poznámky úspěšně uloženy!</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+	</div>
+</div>
+        </main>
+        <footer class="l-f cf">
+            <div class="sw cf">
+	<div class="sw-c cf"><section class="s s-footer-dark cf sc-w   wnd-w-wide wnd-s-normal wnd-h-auto">
+	<div class="s-w cf">
+		<div class="s-o s-fs cf">
+			<div class="s-bg cf">
+				<div class="s-bg-l">
+                    
+				</div>
+			</div>
+			<div class="s-c s-fs cf">
+				<div class="ez cf wnd-no-cols">
+	<div class="ez-c"><div class="b b-text cf">
+	<div class="b-c b-text-c b-s b-s-t60 b-s-b60 b-cs cf"><p class="wnd-align-center">
+	<span class="it-c">© 2026 tábor šlapanických divadelníků</span>
+</span></p>
+</div>
+</div></div>
+</div>
+			</div>
+		</div>
+	</div>
+</section></div>
+</div>
+        </footer>
+    </div>
+</div>
+
+<script>
+  // Kontrola, jestli je uživatel přihlášený
+  if(sessionStorage.getItem('vedouciLogged') !== 'true') {
+    window.location.href = 'index.html';
+  }
+
+  // Zobrazení jména vedoucího
+  window.addEventListener('load', function() {
+    const name = sessionStorage.getItem('vedouciName') || 'Vedoucí';
+    document.getElementById('welcoming').textContent = `Vítej, ${name}! 👋`;
+    
+    // Načtení všech dat
+    loadThings();
+    loadRoles();
+    loadNotes();
+  });
+
+  // Přepínání sekcí
+  function switchSection(sectionId) {
+    // Skrytí všech sekcí
+    const sections = document.querySelectorAll('.editable-section');
+    sections.forEach(section => section.classList.remove('active'));
+    
+    // Zobrazení vybrané sekce
+    document.getElementById(sectionId).classList.add('active');
+    
+    // Aktualizace tlačítek - deaktivace všech
+    const buttons = document.querySelectorAll('.sidebar-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    
+    // Aktivace správného tlačítka - podle data atributu nebo text obsahu
+    buttons.forEach(btn => {
+      if(btn.tagName === 'BUTTON' && btn.getAttribute('onclick').includes(sectionId)) {
+        btn.classList.add('active');
+      }
+    });
+  }
+
+  // === VĚCI U KACHI ===
+  function loadThings() {
+    const things = JSON.parse(localStorage.getItem('vedouciThings')) || [];
+    displayThingsList(things);
+  }
+
+  function displayThingsList(things) {
+    const list = document.getElementById('thingsList');
+    
+    if(things.length === 0) {
+      list.innerHTML = '<li style="color: #999; text-align: center; padding: 20px;">Zatím nejsou přidány žádné věci. Přidej první!</li>';
+      return;
+    }
+    
+    list.innerHTML = '';
+    things.forEach((thing, index) => {
+      const li = document.createElement('li');
+      li.style.cssText = 'display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 8px;';
+      li.innerHTML = `
+        <span>${thing}</span>
+        <button onclick="removeThings(${index})" style="background: #d63031; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px;">Odstranit</button>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  function addThing() {
+    const input = document.getElementById('thingsInput');
+    const value = input.value.trim();
+    
+    if(value === '') {
+      alert('Napiš, co chceš přidat!');
+      return;
+    }
+    
+    const things = JSON.parse(localStorage.getItem('vedouciThings')) || [];
+    things.push(value);
+    localStorage.setItem('vedouciThings', JSON.stringify(things));
+    
+    input.value = '';
+    input.focus();
+    displayThingsList(things);
+    showSuccess('thingsSuccess');
+  }
+
+  function removeThings(index) {
+    if(!confirm('Opravdu chceš tuto věc odstranit?')) return;
+    
+    let things = JSON.parse(localStorage.getItem('vedouciThings')) || [];
+    things.splice(index, 1);
+    localStorage.setItem('vedouciThings', JSON.stringify(things));
+    
+    displayThingsList(things);
+    showSuccess('thingsSuccess');
+  }
+
+  // === KDO JE JAKÁ ROLE ===
+  function editRoles() {
+    const content = localStorage.getItem('vedouciRoles') || '';
+    document.getElementById('rolesContent').value = content;
+    document.getElementById('rolesView').style.display = 'none';
+    document.getElementById('rolesEdit').style.display = 'block';
+    document.querySelectorAll('.edit-btn')[1].style.display = 'none';
+  }
+
+  function saveRoles() {
+    const content = document.getElementById('rolesContent').value;
+    localStorage.setItem('vedouciRoles', content);
+    
+    // Aktualizace zobrazení
+    displayRoles(content);
+    
+    // Skrytí editace a zobrazení zprávy
+    document.getElementById('rolesEdit').style.display = 'none';
+    document.getElementById('rolesView').style.display = 'block';
+    document.querySelectorAll('.edit-btn')[1].style.display = 'block';
+    
+    // Zobrazení zprávy o úspěchu
+    showSuccess('rolesSuccess');
+  }
+
+  function cancelEditRoles() {
+    document.getElementById('rolesEdit').style.display = 'none';
+    document.getElementById('rolesView').style.display = 'block';
+    document.querySelectorAll('.edit-btn')[1].style.display = 'block';
+  }
+
+  function loadRoles() {
+    const content = localStorage.getItem('vedouciRoles') || '';
+    displayRoles(content);
+  }
+
+  function displayRoles(content) {
+    if(content.trim() === '') {
+      document.getElementById('rolesView').innerHTML = '<p style="color: #999;">Zatím nic není uloženo. Klikni na Upravit a přidej role.</p>';
+    } else {
+      document.getElementById('rolesView').innerHTML = '<p><strong>Role vedoucích:</strong></p><pre style="background: white; padding: 10px; border-radius: 4px; overflow-x: auto;">' + content + '</pre>';
+    }
+  }
+
+  // === POZNÁMKY ===
+  function loadNotes() {
+    const savedNotes = localStorage.getItem('vedouciNotes');
+    if(savedNotes) {
+      document.getElementById('notesContent').value = savedNotes;
+    }
+  }
+
+  function saveNotes() {
+    const notes = document.getElementById('notesContent').value;
+    localStorage.setItem('vedouciNotes', notes);
+    showSuccess('notesSuccess');
+  }
+
+  // === POMOCNÉ FUNKCE ===
+  function showSuccess(elementId) {
+    const element = document.getElementById(elementId);
+    element.style.display = 'block';
+    setTimeout(() => {
+      element.style.display = 'none';
+    }, 3000);
+  }
+
+  // Odhlášení
+  function logout() {
+    sessionStorage.removeItem('vedouciLogged');
+    sessionStorage.removeItem('vedouciName');
+    window.location.href = 'index.html';
+  }
+</script>
+</body>
+</html>
