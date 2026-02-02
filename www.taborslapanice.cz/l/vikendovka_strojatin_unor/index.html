@@ -87,7 +87,26 @@ body.l.wt-blogpost {
   }
 }
 </style><style>.dots li::before { content: "" !important; }</style></head>
-<body class="l wt-blogpost ac-i ac-n l-default l-d-border b-btn-r b-btn-s-l b-btn-dso b-btn-bw-1 img-d-r img-t-u img-h-n line-solid b-e-ds lbox-l   hb-on wnd-free-bar-limited  wnd-fe"><noscript>
+<body class="l wt-blogpost ac-i ac-n l-default l-d-border b-btn-r b-btn-s-l b-btn-dso b-btn-bw-1 img-d-r img-t-u img-h-n line-solid b-e-ds lbox-l   hb-on wnd-free-bar-limited  wnd-fe">
+<style>
+.more-text::before,
+.more-text::after,
+.menu-wrapper .more-text::before,
+.menu-wrapper .more-text::after {
+    content: "" !important;
+    display: none !important;
+    font-family: inherit !important;
+}
+/* Přepiš ikonu za položkami menu (WebnodeIcons) na běžnou šipku, aby nebyl čtvereček */
+.sc-w.s-hn.wnd-mt-classic .level-1>li>.menu-item::after,
+.sc-w.s-hn.wnd-mt-classic .level-1>li>.menu-item+.mm-arrow::after {
+    content: "▾" !important;
+    font-family: inherit !important;
+    font-size: 0.9em !important;
+    margin-left: 0.2em !important;
+}
+</style>
+<noscript>
                 <iframe
                  src="https://www.googletagmanager.com/ns.html?id=GTM-542MMSL"
                  height="0"
@@ -209,7 +228,7 @@ body.l.wt-blogpost {
             <a class="menu-item" role="menuitem" href="../../vedouci/index.html"><span class="menu-item-text">🔐 Vedoucí</span></a>
             
         </li></ul>
-    <span class="more-text">Více</span>
+    <span class="more-text">Více ▼</span>
 </div></nav>
                             </div>
                         </div>

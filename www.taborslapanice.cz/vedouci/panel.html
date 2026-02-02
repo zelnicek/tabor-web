@@ -370,6 +370,24 @@ body.l.wt-page {
 }
 </style></head>
 <body class="l wt-page ac-i ac-n l-default l-d-border b-btn-r b-btn-s-l b-btn-dso b-btn-bw-1 img-d-r img-t-u img-h-n line-solid b-e-ds lbox-l   hb-on wnd-free-bar-limited  wnd-fe">
+<style>
+.more-text::before,
+.more-text::after,
+.menu-wrapper .more-text::before,
+.menu-wrapper .more-text::after {
+  content: "" !important;
+  display: none !important;
+  font-family: inherit !important;
+}
+/* Přepiš ikonu za položkami menu (WebnodeIcons) na běžnou šipku, aby nebyl čtvereček */
+.sc-w.s-hn.wnd-mt-classic .level-1>li>.menu-item::after,
+.sc-w.s-hn.wnd-mt-classic .level-1>li>.menu-item+.mm-arrow::after {
+  content: "▾" !important;
+  font-family: inherit !important;
+  font-size: 0.9em !important;
+  margin-left: 0.2em !important;
+}
+</style>
 
 <div class="wnd-page l-page cs-fiord ac-danube t-t-fs-m t-t-fw-s t-t-sp-n t-t-d-n t-s-fs-s t-s-fw-s t-s-sp-n t-s-d-n t-p-fs-s t-p-fw-s t-p-sp-n t-h-fs-m t-h-fw-s t-h-sp-n t-bq-fs-s t-bq-fw-s t-bq-sp-n t-bq-d-l t-btn-fw-l t-nav-fw-l t-pd-fw-l t-nav-tt-n">
     <div class="l-w t cf t-14">
@@ -461,7 +479,7 @@ body.l.wt-page {
       <a class="menu-item" role="menuitem" href="index.html"><span class="menu-item-text">🔐 Vedoucí</span></a>
     </li>
   </ul>
-  <span class="more-text">Více</span>
+  <span class="more-text">Více ▼</span>
 </div></nav>
               </div>
             </div>
