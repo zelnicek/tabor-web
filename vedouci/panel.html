@@ -235,6 +235,23 @@ body.l.wt-page {
   resize: vertical;
 }
 
+.file-drop {
+  border: 2px dashed #bbb;
+  border-radius: 4px;
+  padding: 12px;
+  text-align: center;
+  color: #555;
+  background: #fafafa;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.file-drop.drag-over {
+  border-color: #40916c;
+  background: #e8f7ec;
+  color: #2d6a4f;
+}
+
 .button-group {
   display: flex;
   gap: 10px;
@@ -522,6 +539,7 @@ body.l.wt-page {
             <button class="sidebar-btn" onclick="switchSection('doc')">📄 Tábor 2026 – dokument</button>
             <button class="sidebar-btn" onclick="switchSection('roles')">👥 Kdo je jaká role</button>
             <button class="sidebar-btn" onclick="switchSection('schedule')">📅 Rozvrh</button>
+            <button class="sidebar-btn" onclick="switchSection('downloads')">📎 Ke stažení</button>
             <button class="sidebar-btn" onclick="switchSection('notes')">📝 Poznámky</button>
             <a href="https://drive.google.com/drive/folders/1XxwXZBY1pOoUafPErjgcEahZ1Ui290iX?usp=drive_link" target="_blank" class="sidebar-btn" style="text-decoration: none;">📁 Disk</a>
           </div>
@@ -542,10 +560,53 @@ body.l.wt-page {
                 <div class="success-message" id="thingsSuccess">Věci úspěšně uloženy!</div>
               </div>
             </div>
+            <div id="downloads" class="editable-section">
+              <div class="section">
+                <h2>📎 Ke stažení pro vedoucí</h2>
+                <div class="content-box">
+                  <p style="margin-top: 0;">Zde najdeš důležité dokumenty ke stažení. Zatím je zde jeden soubor, časem sem můžeme přidat další.</p>
+                  <ul style="list-style: none; padding-left: 0; margin: 0;">
+                    <li style="margin-bottom: 8px;">
+                      <a href="../pdfs/papiry_na_hlavu.pdf" target="_blank" rel="noreferrer" download>
+                        📄 Papíry na hlavu (PDF)
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
             <div id="doc" class="editable-section">
               <div class="section">
                 <h2>📄 Tábor 2026 – materiál pro vedoucí</h2>
+
+                <div class="editable-content">
+                  <h3 style="margin-top: 0;">Nový příspěvek</h3>
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                    <input id="docPostTitle" type="text" placeholder="Krátký nadpis (např. Materiály k poradě)" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    <textarea id="docPostText" placeholder="Text / poznámka k příspěvku..." style="min-height: 100px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                    <input id="docPostLink" type="text" placeholder="Odkaz / soubor (např. https://..., nebo ../pdfs/nazev.pdf)" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                  </div>
+                  <div id="docFileDrop" class="file-drop">
+                    Klikni sem nebo sem přetáhni soubor z počítače (např. z plochy).<br>
+                    <span style="font-size: 12px; color: #777;">Po nahrání se odkaz automaticky doplní do políčka výše.</span>
+                  </div>
+                  <input type="file" id="docFileInput" style="display: none;" />
+                  <div class="button-group">
+                    <button class="save-btn" id="docPostSubmitBtn" onclick="addOrSaveDocPost()">Přidat příspěvek</button>
+                    <button class="cancel-btn" id="docPostCancelBtn" onclick="cancelEditDocPost()" style="display: none;">Zrušit úpravu</button>
+                  </div>
+                </div>
+
+                <div class="success-message" id="docPostsSuccess">Soubor byl nahrán, odkaz je připraven. Doplň text a ulož příspěvek.</div>
+
+                <div class="content-box" style="margin-top: 20px;">
+                  <h3 style="margin-top: 0;">Přehled příspěvků</h3>
+                  <div id="docPostsList">
+                    <p style="color: #999; margin: 0;">Načítám příspěvky...</p>
+                  </div>
+                </div>
+
                 <div class="content-box">
                   <p style="margin-top: 0;">Zde je vložený dokument k letošnímu táboru. Přečtěte si ho prosím před poradami a přípravou programu. Pokud by se náhled nezobrazoval, použijte odkaz níže.</p>
                   <iframe src="../pdfs/Hybridní-model-26.pdf" title="Hybridní model tábora 2026" style="width:100%; min-height:600px; border:1px solid #ddd; border-radius:4px;"></iframe>
@@ -636,13 +697,15 @@ body.l.wt-page {
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, getDoc, setDoc } 
            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } 
+          from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
     // 1. VAŠE KONFIGURACE (Zkopírováno z předchozí konverzace)
     const firebaseConfig = {
       apiKey: "AIzaSyBG1LoqMGiGKsGpvqYek2w0ionlJ9DclgE",
       authDomain: "taborslapanice-56a54.firebaseapp.com",
       projectId: "taborslapanice-56a54",
-      storageBucket: "taborslapanice-56a54.firebasestorage.app",
+      storageBucket: "taborslapanice-56a54.appspot.com",
       messagingSenderId: "325154268592",
       appId: "1:325154268592:web:0e8cb0d9b64d1f58bfe275",
       measurementId: "G-8FMYDYV5FC"
@@ -651,11 +714,13 @@ body.l.wt-page {
     // Inicializace
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const storage = getStorage(app);
 
     // Kolekce
     const colVeci = collection(db, "veci_kaca");
     const docRoles = doc(db, "obsah_panelu", "role");
     const docNotes = doc(db, "obsah_panelu", "poznamky");
+    const colDocPosts = collection(db, "tabor2026_prispevky");
 
     // --- 2. KONTROLA PŘIHLÁŠENÍ ---
     const userName = localStorage.getItem('tabor_user_name');
@@ -787,6 +852,132 @@ body.l.wt-page {
     };
 
 
+    // --- 7. TÁBOR 2026 – PŘÍSPĚVKY (Databáze) ---
+    let currentDocPostId = null;
+
+    const docPostsQuery = query(colDocPosts, orderBy("created", "desc"));
+    onSnapshot(docPostsQuery, (snapshot) => {
+      const container = document.getElementById('docPostsList');
+      if (!container) return;
+
+      if (snapshot.empty) {
+        container.innerHTML = '<p style="color: #999; margin: 0;">Zatím žádné příspěvky.</p>';
+        return;
+      }
+
+      let html = '';
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        const created = data.created ? new Date(data.created) : null;
+        const dateStr = created ? created.toLocaleString('cs-CZ') : '';
+
+        html += `
+          <div style="background: white; border: 1px solid #ddd; border-radius: 4px; padding: 12px 14px; margin-bottom: 10px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">${escapeHtml(data.title || 'Bez názvu')}</div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 6px;">
+              ${data.author ? escapeHtml(data.author) : 'Neznámý autor'}${dateStr ? ' • ' + escapeHtml(dateStr) : ''}
+            </div>
+            ${data.text ? `<div style="margin-bottom: 6px; white-space: pre-wrap;">${escapeHtml(data.text)}</div>` : ''}
+            ${data.link ? `<div style="margin-bottom: 6px;"><a href="${escapeHtml(data.link)}" target="_blank" rel="noreferrer">Otevřít odkaz / soubor</a></div>` : ''}
+            <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px;">
+              <button onclick="startEditDocPost('${docSnap.id}')" style="background: #40916c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px;">Upravit</button>
+              <button onclick="deleteDocPost('${docSnap.id}')" style="background: #d63031; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px;">Smazat</button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    });
+
+    window.addOrSaveDocPost = async function() {
+      const titleEl = document.getElementById('docPostTitle');
+      const textEl = document.getElementById('docPostText');
+      const linkEl = document.getElementById('docPostLink');
+
+      if (!titleEl || !textEl || !linkEl) return;
+
+      const title = titleEl.value.trim();
+      const text = textEl.value.trim();
+      const link = linkEl.value.trim();
+
+      if (!title && !text && !link) {
+        alert('Vyplň prosím aspoň text nebo odkaz.');
+        return;
+      }
+
+      const payload = {
+        title,
+        text,
+        link,
+        author: userName || '',
+        created: Date.now()
+      };
+
+      if (currentDocPostId) {
+        await setDoc(doc(db, 'tabor2026_prispevky', currentDocPostId), payload, { merge: true });
+      } else {
+        await addDoc(colDocPosts, payload);
+      }
+
+      titleEl.value = '';
+      textEl.value = '';
+      linkEl.value = '';
+      currentDocPostId = null;
+
+      const btn = document.getElementById('docPostSubmitBtn');
+      const cancelBtn = document.getElementById('docPostCancelBtn');
+      if (btn) btn.textContent = 'Přidat příspěvek';
+      if (cancelBtn) cancelBtn.style.display = 'none';
+    };
+
+    window.startEditDocPost = async function(id) {
+      const ref = doc(db, 'tabor2026_prispevky', id);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) return;
+
+      const data = snap.data();
+      currentDocPostId = id;
+
+      const titleEl = document.getElementById('docPostTitle');
+      const textEl = document.getElementById('docPostText');
+      const linkEl = document.getElementById('docPostLink');
+      const btn = document.getElementById('docPostSubmitBtn');
+      const cancelBtn = document.getElementById('docPostCancelBtn');
+
+      if (titleEl) titleEl.value = data.title || '';
+      if (textEl) textEl.value = data.text || '';
+      if (linkEl) linkEl.value = data.link || '';
+      if (btn) btn.textContent = 'Uložit změny';
+      if (cancelBtn) cancelBtn.style.display = 'inline-block';
+    };
+
+    window.cancelEditDocPost = function() {
+      currentDocPostId = null;
+
+      const titleEl = document.getElementById('docPostTitle');
+      const textEl = document.getElementById('docPostText');
+      const linkEl = document.getElementById('docPostLink');
+      const btn = document.getElementById('docPostSubmitBtn');
+      const cancelBtn = document.getElementById('docPostCancelBtn');
+
+      if (titleEl) titleEl.value = '';
+      if (textEl) textEl.value = '';
+      if (linkEl) linkEl.value = '';
+      if (btn) btn.textContent = 'Přidat příspěvek';
+      if (cancelBtn) cancelBtn.style.display = 'none';
+    };
+
+    window.deleteDocPost = async function(id) {
+      if (!confirm('Opravdu smazat tento příspěvek?')) return;
+      await deleteDoc(doc(db, 'tabor2026_prispevky', id));
+
+      if (currentDocPostId === id) {
+        window.cancelEditDocPost();
+      }
+    };
+
+
     // --- POMOCNÉ FUNKCE ---
     function showSuccess(elementId) {
         const element = document.getElementById(elementId);
@@ -797,6 +988,77 @@ body.l.wt-page {
     function escapeHtml(text) {
         if (!text) return "";
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // --- Nahrávání souborů přetažením (Tábor 2026) ---
+    const docFileDrop = document.getElementById('docFileDrop');
+    const docFileInput = document.getElementById('docFileInput');
+
+    if (docFileDrop && docFileInput) {
+      const preventDefaults = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      };
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        docFileDrop.addEventListener(eventName, (e) => {
+          preventDefaults(e);
+          docFileDrop.classList.add('drag-over');
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        docFileDrop.addEventListener(eventName, (e) => {
+          preventDefaults(e);
+          docFileDrop.classList.remove('drag-over');
+        });
+      });
+
+      docFileDrop.addEventListener('click', () => {
+        docFileInput.click();
+      });
+
+      docFileDrop.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        if (!dt || !dt.files || !dt.files.length) return;
+        handleDocFile(dt.files[0]);
+      });
+
+      docFileInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) {
+          handleDocFile(file);
+        }
+        docFileInput.value = '';
+      });
+    }
+
+    async function handleDocFile(file) {
+      if (!file) return;
+
+      if (file.size > 20 * 1024 * 1024) { // 20 MB limit
+        alert('Soubor je moc velký (max 20 MB).');
+        return;
+      }
+
+      const safeName = file.name.replace(/\s+/g, '_');
+      const storageRef = ref(storage, `tabor2026_uploads/${Date.now()}_${safeName}`);
+
+      try {
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+
+        const linkEl = document.getElementById('docPostLink');
+        const titleEl = document.getElementById('docPostTitle');
+
+        if (linkEl) linkEl.value = url;
+        if (titleEl && !titleEl.value.trim()) titleEl.value = file.name;
+
+        showSuccess('docPostsSuccess');
+      } catch (err) {
+        console.error(err);
+        alert('Nahrávání souboru se nepovedlo. Zkus to prosím znovu.');
+      }
     }
 
 </script>
