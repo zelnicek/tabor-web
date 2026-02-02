@@ -539,6 +539,7 @@ body.l.wt-page {
             <button class="sidebar-btn" onclick="switchSection('doc')">📄 Tábor 2026 – dokument</button>
             <button class="sidebar-btn" onclick="switchSection('roles')">👥 Kdo je jaká role</button>
             <button class="sidebar-btn" onclick="switchSection('schedule')">📅 Rozvrh</button>
+            <button class="sidebar-btn" onclick="switchSection('games')">🎲 Táborové hry</button>
             <button class="sidebar-btn" onclick="switchSection('downloads')">📎 Ke stažení</button>
             <button class="sidebar-btn" onclick="switchSection('notes')">📝 Poznámky</button>
             <a href="https://drive.google.com/drive/folders/1XxwXZBY1pOoUafPErjgcEahZ1Ui290iX?usp=drive_link" target="_blank" class="sidebar-btn" style="text-decoration: none;">📁 Disk</a>
@@ -646,6 +647,32 @@ body.l.wt-page {
               </div>
             </div>
 
+            <div id="games" class="editable-section">
+              <div class="section">
+                <h2>🎲 Táborové hry</h2>
+                <div class="editable-content">
+                  <h3 style="margin-top: 0;">Nová hra</h3>
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+                    <input id="gameTitle" type="text" placeholder="Název hry (např. Noční hlídka)" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                    <textarea id="gameDescription" placeholder="Krátký popis hry, poznámky, varianty..." style="min-height: 100px; padding: 8px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                    <input id="gameLink" type="text" placeholder="Odkaz / soubor (např. https://..., nebo ../pdfs/nazev.pdf)" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                  </div>
+                  <div class="button-group">
+                    <button class="save-btn" id="gameSubmitBtn" onclick="addOrSaveGame()">Přidat hru</button>
+                    <button class="cancel-btn" id="gameCancelBtn" onclick="cancelEditGame()" style="display: none;">Zrušit úpravu</button>
+                  </div>
+                </div>
+                <div class="success-message" id="gamesSuccess">Hra byla uložena.</div>
+
+                <div class="content-box" style="margin-top: 20px;">
+                  <h3 style="margin-top: 0;">Seznam her</h3>
+                  <div id="gamesList">
+                    <p style="color: #999; margin: 0;">Zatím žádné hry.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div id="notes" class="editable-section">
               <div class="section">
                 <h2>📝 Vlastní poznámky</h2>
@@ -721,6 +748,7 @@ body.l.wt-page {
     const docRoles = doc(db, "obsah_panelu", "role");
     const docNotes = doc(db, "obsah_panelu", "poznamky");
     const colDocPosts = collection(db, "tabor2026_prispevky");
+    const colGames = collection(db, "taborove_hry");
 
     // --- 2. KONTROLA PŘIHLÁŠENÍ ---
     const userName = localStorage.getItem('tabor_user_name');
@@ -974,6 +1002,133 @@ body.l.wt-page {
 
       if (currentDocPostId === id) {
         window.cancelEditDocPost();
+      }
+    };
+
+
+    // --- 8. TÁBOROVÉ HRY (Databáze) ---
+    let currentGameId = null;
+
+    const gamesQuery = query(colGames, orderBy("created", "desc"));
+    onSnapshot(gamesQuery, (snapshot) => {
+      const container = document.getElementById('gamesList');
+      if (!container) return;
+
+      if (snapshot.empty) {
+        container.innerHTML = '<p style="color: #999; margin: 0;">Zatím žádné hry.</p>';
+        return;
+      }
+
+      let html = '';
+      snapshot.forEach((docSnap) => {
+        const data = docSnap.data();
+        const created = data.created ? new Date(data.created) : null;
+        const dateStr = created ? created.toLocaleString('cs-CZ') : '';
+
+        html += `
+          <div style="background: white; border: 1px solid #ddd; border-radius: 4px; padding: 12px 14px; margin-bottom: 10px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">${escapeHtml(data.title || 'Bez názvu')}</div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 6px;">
+              ${data.author ? escapeHtml(data.author) : 'Neznámý autor'}${dateStr ? ' • ' + escapeHtml(dateStr) : ''}
+            </div>
+            ${data.description ? `<div style="margin-bottom: 6px; white-space: pre-wrap;">${escapeHtml(data.description)}</div>` : ''}
+            ${data.link ? `<div style="margin-bottom: 6px;"><a href="${escapeHtml(data.link)}" target="_blank" rel="noreferrer">Otevřít odkaz / soubor</a></div>` : ''}
+            <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px;">
+              <button onclick="startEditGame('${docSnap.id}')" style="background: #40916c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px;">Upravit</button>
+              <button onclick="deleteGame('${docSnap.id}')" style="background: #d63031; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px;">Smazat</button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    });
+
+    window.addOrSaveGame = async function() {
+      const titleEl = document.getElementById('gameTitle');
+      const descEl = document.getElementById('gameDescription');
+      const linkEl = document.getElementById('gameLink');
+
+      if (!titleEl || !descEl || !linkEl) return;
+
+      const title = titleEl.value.trim();
+      const description = descEl.value.trim();
+      const link = linkEl.value.trim();
+
+      if (!title && !description && !link) {
+        alert('Vyplň prosím aspoň název nebo popis hry.');
+        return;
+      }
+
+      const payload = {
+        title,
+        description,
+        link,
+        author: userName || '',
+        created: Date.now()
+      };
+
+      if (currentGameId) {
+        await setDoc(doc(db, 'taborove_hry', currentGameId), payload, { merge: true });
+      } else {
+        await addDoc(colGames, payload);
+      }
+
+      titleEl.value = '';
+      descEl.value = '';
+      linkEl.value = '';
+      currentGameId = null;
+
+      const btn = document.getElementById('gameSubmitBtn');
+      const cancelBtn = document.getElementById('gameCancelBtn');
+      if (btn) btn.textContent = 'Přidat hru';
+      if (cancelBtn) cancelBtn.style.display = 'none';
+      showSuccess('gamesSuccess');
+    };
+
+    window.startEditGame = async function(id) {
+      const ref = doc(db, 'taborove_hry', id);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) return;
+
+      const data = snap.data();
+      currentGameId = id;
+
+      const titleEl = document.getElementById('gameTitle');
+      const descEl = document.getElementById('gameDescription');
+      const linkEl = document.getElementById('gameLink');
+      const btn = document.getElementById('gameSubmitBtn');
+      const cancelBtn = document.getElementById('gameCancelBtn');
+
+      if (titleEl) titleEl.value = data.title || '';
+      if (descEl) descEl.value = data.description || '';
+      if (linkEl) linkEl.value = data.link || '';
+      if (btn) btn.textContent = 'Uložit změny';
+      if (cancelBtn) cancelBtn.style.display = 'inline-block';
+    };
+
+    window.cancelEditGame = function() {
+      currentGameId = null;
+
+      const titleEl = document.getElementById('gameTitle');
+      const descEl = document.getElementById('gameDescription');
+      const linkEl = document.getElementById('gameLink');
+      const btn = document.getElementById('gameSubmitBtn');
+      const cancelBtn = document.getElementById('gameCancelBtn');
+
+      if (titleEl) titleEl.value = '';
+      if (descEl) descEl.value = '';
+      if (linkEl) linkEl.value = '';
+      if (btn) btn.textContent = 'Přidat hru';
+      if (cancelBtn) cancelBtn.style.display = 'none';
+    };
+
+    window.deleteGame = async function(id) {
+      if (!confirm('Opravdu smazat tuto hru?')) return;
+      await deleteDoc(doc(db, 'taborove_hry', id));
+
+      if (currentGameId === id) {
+        window.cancelEditGame();
       }
     };
 
