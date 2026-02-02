@@ -397,10 +397,197 @@ body.l.wt-page {
 		<h3><strong>Přihlášky</strong></h3>
 		<div class="info-callout"><strong>Termín uzavření přihlášek:</strong> <span class="info-highlight">31. 3. 2026</span></div>
 		<p>Vyplněnou přihlášku pošlete na adresu: <strong>Tomáš Okřina, Hrubšice 133, Ivančice 664 91</strong> nebo naskenovanou elektronicky na <a href="mailto:info@taborslapanice.cz">info@taborslapanice.cz</a>.</p>
+		</div>
 	</div>
-</div>
 
-<div class="b b-text cf">
+	<div class="camp-capacity-wrapper">
+	  
+	  <h3 class="camp-cap-title">⛺ Obsazenost tábora 2026</h3>
+	  
+	  <div class="camp-track">
+		<div class="camp-fill" id="camp-bar-fill">
+		  <div class="hiker-icon">🚶</div>
+		</div>
+		<div class="tent-goal">⛺</div>
+	  </div>
+
+	  <div class="camp-stats">
+		<span class="stat-item">Přihlášeno: <strong id="camp-current">0</strong></span>
+		<span class="stat-item">Kapacita: <strong>50</strong></span>
+	  </div>
+	  
+	  <p id="camp-message" class="camp-message">Místa zatím jsou, neváhejte!</p>
+
+	</div>
+
+	<style>
+	  @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+	  .camp-capacity-wrapper {
+		font-family: 'Patrick Hand', cursive;
+		background: #fdfdfd;
+		border: 2px dashed #bdc3c7;
+		border-radius: 15px;
+		padding: 20px;
+		max-width: 600px;
+		margin: 20px auto;
+		text-align: center;
+		box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+	  }
+
+	  .camp-cap-title {
+		margin-top: 0;
+		color: #2c3e50;
+		font-size: 1.8rem;
+	  }
+
+	  /* Kolejnice (pozadí baru) */
+	  .camp-track {
+		background-color: #e0e0e0;
+		height: 30px;
+		border-radius: 15px;
+		position: relative;
+		margin: 30px 10px; /* Místo pro ikonky nahoře/dole */
+		box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+	  }
+
+	  /* Výplň (barva) */
+	  .camp-fill {
+		background: linear-gradient(90deg, #2ecc71, #27ae60); /* Výchozí zelená */
+		height: 100%;
+		border-radius: 15px;
+		width: 0%; /* Začíná na 0, JS to změní */
+		transition: width 2s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s;
+		position: relative;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+	  }
+
+/* Turista */
+  .hiker-icon {
+    position: absolute;
+    right: -10px; 
+    top: -28px;   
+    font-size: 24px;
+    
+    /* Tady nastavíme otočení */
+    transform: scaleX(-1); 
+    
+    transition: left 2s;
+    animation: bounce 1s infinite alternate;
+  }
+
+  /* Opravená animace, která zachovává otočení */
+  @keyframes bounce {
+    from { transform: scaleX(-1) translateY(0); }
+    to { transform: scaleX(-1) translateY(-3px); }
+  }
+
+	  /* Cílový stan */
+	  .tent-goal {
+		position: absolute;
+		right: -10px;
+		top: -28px;
+		font-size: 24px;
+		z-index: 1;
+	  }
+
+	  /* Statistiky */
+	  .camp-stats {
+		display: flex;
+		justify-content: space-between;
+		font-size: 1.2rem;
+		color: #7f8c8d;
+		margin-top: 10px;
+	  }
+	  
+	  .camp-stats strong {
+		color: #2c3e50;
+		font-size: 1.4rem;
+	  }
+
+	  /* Zpráva dole */
+	  .camp-message {
+		margin-bottom: 0;
+		margin-top: 10px;
+		font-size: 1.1rem;
+		color: #e67e22;
+		font-weight: bold;
+	  }
+
+	</style>
+
+	<script>
+	  // ==========================================
+	  // ZDE UPRAVUJTE POČET PŘIHLÁŠENÝCH DĚTÍ
+	  // ==========================================
+	  
+	  let pocetPrihlasenych = 0; // <--- TOTO ČÍSLO MĚŇTE
+	  
+	  // ==========================================
+
+	  const maximalniKapacita = 50;
+
+	  document.addEventListener("DOMContentLoaded", function() {
+		// Zajištění, abychom nepřekročili 50 (graficky)
+		if (pocetPrihlasenych > maximalniKapacita) pocetPrihlasenych = maximalniKapacita;
+
+		// Výpočet procent
+		const procenta = (pocetPrihlasenych / maximalniKapacita) * 100;
+		
+		// Elementy
+		const fillBar = document.getElementById('camp-bar-fill');
+		const currentNum = document.getElementById('camp-current');
+		const msg = document.getElementById('camp-message');
+
+		// Animace čísla
+		animateValue(currentNum, 0, pocetPrihlasenych, 2000);
+
+		// Nastavení šířky baru (spustí CSS animaci)
+		setTimeout(() => {
+		  fillBar.style.width = procenta + "%";
+		}, 200); // Malá prodleva po načtení
+
+		// Změna barev a textu podle zaplnění
+		setTimeout(() => {
+			if (procenta >= 90) {
+				// Skoro plno - ČERVENÁ
+				fillBar.style.background = "linear-gradient(90deg, #e74c3c, #c0392b)";
+				msg.innerHTML = "🔥 Poslední volná místa! Rychle se přihlas!";
+				msg.style.color = "#c0392b";
+			} else if (procenta >= 60) {
+				// Za polovinou - ORANŽOVÁ
+				fillBar.style.background = "linear-gradient(90deg, #f1c40f, #e67e22)";
+				msg.innerHTML = "Už jsme za polovinou, neváhejte.";
+				msg.style.color = "#d35400";
+			} else {
+				// Začátek - ZELENÁ
+				msg.innerHTML = "Přihlašování běží, místa zatím jsou.";
+				msg.style.color = "#27ae60";
+			}
+			
+			if (pocetPrihlasenych === maximalniKapacita) {
+				 msg.innerHTML = "🚫 KAPACITA NAPLNĚNA! (Hlásit se můžete jako náhradníci)";
+				 document.querySelector('.hiker-icon').innerHTML = "🙌"; // Změna ikony na radost
+			}
+		}, 200);
+	  });
+
+	  // Pomocná funkce pro animaci čísla od 0 do finálního
+	  function animateValue(obj, start, end, duration) {
+		let startTimestamp = null;
+		const step = (timestamp) => {
+		  if (!startTimestamp) startTimestamp = timestamp;
+		  const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+		  obj.innerHTML = Math.floor(progress * (end - start) + start);
+		  if (progress < 1) {
+			window.requestAnimationFrame(step);
+		  }
+		};
+		window.requestAnimationFrame(step);
+	  }
+	</script>
+
+	<div class="b b-text cf">
 	<div class="b-c b-text-c b-s b-s-t10 b-s-b30 b-cs cf">
 		<h3><strong>Platba</strong></h3>
 		<div class="info-callout"><strong>Číslo účtu:</strong> <span class="info-highlight">282723476/0300</span></div>
