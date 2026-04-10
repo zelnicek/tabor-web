@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" prefix="og: https://ogp.me/ns#" lang="cs">
 <head><link rel="preconnect" href="https://duyn491kcolsw.cloudfront.net/" crossorigin><link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><meta charset="utf-8">
-<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="icon" href="../favicon_egypt.png" type="image/png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Přihlášení vedoucích :: tábor šlapanických divadelníků</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -29,7 +29,54 @@ body.l.wt-page { padding-top: 0 !important; }
 .form-group button { width: 100%; padding: 12px; background: linear-gradient(135deg, #40916c, #2d6a4f); color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
 .form-group button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(64, 145, 108, 0.3); }
 .error-message { color: #d63031; margin-bottom: 20px; padding: 10px; background: #ffe5e5; border-radius: 4px; display: none; }
-</style></head>
+</style>
+
+<style>
+/* Zlaty odlesk na text loga */
+.logo-text-cell strong {
+  background: linear-gradient(120deg, #333333 35%, #d4af37 50%, #333333 65%);
+  background-size: 200% auto;
+  color: transparent !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  animation: logoShine 5s linear infinite;
+}
+@keyframes logoShine {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Levitujici okridlene slunce */
+.egypt-winged-sun {
+  display: inline-block;
+  width: 40px;
+  height: auto;
+  margin-left: 10px;
+  vertical-align: middle;
+  animation: floatSun 4s ease-in-out infinite;
+  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));
+}
+@keyframes floatSun {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(3deg); }
+}
+
+/* Zlaty efekt pri najeti mysi na menu */
+.level-1 > li > a.menu-item:hover .menu-item-text {
+  color: #d4af37 !important;
+  transition: color 0.3s ease;
+}
+
+/* Zmenseni slunce na mobilnich telefonech */
+@media (max-width: 480px) {
+  .egypt-winged-sun {
+    width: 28px;
+    margin-left: 5px;
+  }
+}
+</style>
+
+</head>
 <body class="l wt-page ac-i ac-n l-default l-d-border b-btn-r b-btn-s-l b-btn-dso b-btn-bw-1 img-d-r img-t-u img-h-n line-solid b-e-ds lbox-l    hb-on wnd-free-bar-limited  wnd-fe">
 <style>
 .more-text::before,
@@ -96,13 +143,17 @@ body.l.wt-page { padding-top: 0 !important; }
   <div class="b-l-c logo-content">
     <div class="b-l-image logo-image">
     <div class="b-l-image-w logo-image-cell">
-        <img src="../favicon.png" alt="Logo" style="max-height: 80px; width: auto; margin-right: 10px;">
+        <img src="../favicon_egypt.png" alt="Logo" style="max-height: 80px; width: auto; margin-right: 10px;">
     </div>
 </div>
       <div class="b-l-br logo-br"></div>
       <div class="b-l-text logo-text-wrapper">
         <div class="b-l-text-w logo-text">
-          <span class="b-l-text-c logo-text-cell"><strong>Tábor šlapanických divadelníků</strong></span>
+          <span class="b-l-text-c logo-text-cell">
+  <strong>Tábor šlapanických divadelníků</strong>
+  <img class="egypt-winged-sun" src="../ra.png" alt="Ra">
+</span>
+
         </div>
       </div>
   </div>
@@ -242,5 +293,6 @@ body.l.wt-page { padding-top: 0 !important; }
     window.location.href = 'panel.html';
   }
 </script>
+
 </body>
 </html>

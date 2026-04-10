@@ -5,7 +5,7 @@
   <link rel="preconnect" href="https://duyn491kcolsw.cloudfront.net/" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <meta charset="utf-8">
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="favicon_egypt.png" type="image/png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>tábor šlapanických divadelníků</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -152,6 +152,63 @@
     .dots li::before {
       content: "•" !important;
     }
+
+    /* Zlaty odlesk na text loga */
+    .logo-text-cell strong {
+      background: linear-gradient(120deg, #333333 35%, #d4af37 50%, #333333 65%);
+      background-size: 200% auto;
+      color: transparent !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      animation: logoShine 5s linear infinite;
+    }
+
+    @keyframes logoShine {
+      0% {
+        background-position: 200% center;
+      }
+
+      100% {
+        background-position: -200% center;
+      }
+    }
+
+    /* Levitujici okridlene slunce */
+    .egypt-winged-sun {
+      display: inline-block;
+      width: 40px;
+      height: auto;
+      margin-left: 10px;
+      vertical-align: middle;
+      animation: floatSun 4s ease-in-out infinite;
+      filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
+    }
+
+    @keyframes floatSun {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-4px) rotate(3deg);
+      }
+    }
+
+    /* Zlaty efekt pri najeti mysi na menu */
+    .level-1>li>a.menu-item:hover .menu-item-text {
+      color: #d4af37 !important;
+      transition: color 0.3s ease;
+    }
+
+    /* Zmenseni slunce na mobilnich telefonech */
+    @media (max-width: 480px) {
+      .egypt-winged-sun {
+        width: 28px;
+        margin-left: 5px;
+      }
+    }
   </style>
   <style>
     /* --- EGYPT LOADER CSS --- */
@@ -275,6 +332,7 @@
       }
     })();
   </script>
+
 </head>
 
 <body
@@ -399,7 +457,7 @@
 
                               <div class="b-l-image logo-image">
                                 <div class="b-l-image-w logo-image-cell">
-                                  <img src="favicon.png" alt="Logo"
+                                  <img src="favicon_egypt.png" alt="Logo"
                                     style="max-height: 80px; width: auto; margin-right: 10px;">
                                 </div>
                               </div>
@@ -410,8 +468,10 @@
 
                               <div class="b-l-text logo-text-wrapper">
                                 <div class="b-l-text-w logo-text">
-                                  <span class="b-l-text-c logo-text-cell"><strong>Tábor šlapanických
-                                      divadelníků</strong></span>
+                                  <span class="b-l-text-c logo-text-cell">
+                                    <strong>Tábor šlapanických divadelníků</strong>
+                                    <img class="egypt-winged-sun" src="ra.png" alt="Ra">
+                                  </span>
                                 </div>
                               </div>
 
@@ -525,14 +585,11 @@
                                   /* Pozadí přes celou obrazovku - zvýšený z-index na 20000 */
                                   #camp-popup-overlay {
                                     position: fixed;
-                                    top: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 100%;
+                                    inset: 0;
                                     background-color: rgba(0, 0, 0, 0.75);
                                     /* Trochu tmavší pro lepší efekt */
-                                    z-index: 20000 !important;
-                                    /* Musí být vyšší než header (10000) */
+                                    z-index: 2147483646 !important;
+                                    /* Musí být nad všemi fixed prvky včetně headeru */
                                     display: none;
                                     justify-content: center;
                                     align-items: center;
@@ -632,6 +689,13 @@
                                 </div>
 
                                 <script>
+                                  (function () {
+                                    var overlay = document.getElementById('camp-popup-overlay');
+                                    if (overlay && overlay.parentNode !== document.body) {
+                                      document.body.appendChild(overlay);
+                                    }
+                                  })();
+
                                   function showPopup() {
                                     document.getElementById('camp-popup-overlay').style.display = 'flex';
                                     // Volitelné: Zabrání scrollování stránky, když je popup otevřený
@@ -643,9 +707,9 @@
                                     document.body.style.overflow = 'auto';
                                   }
 
-                                  window.onload = function () {
+                                  window.addEventListener('load', function () {
                                     setTimeout(showPopup, 1000);
-                                  };
+                                  });
                                 </script>
                               </div>
                             </div>
@@ -1656,6 +1720,7 @@
       }, 2600);
     });
   </script>
+
 </body>
 
 </html>
