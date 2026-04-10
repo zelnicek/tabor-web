@@ -153,10 +153,145 @@
       content: "•" !important;
     }
   </style>
+  <style>
+    /* --- EGYPT LOADER CSS --- */
+    .loader-seen #egypt-loader {
+      display: none !important;
+    }
+
+    #egypt-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #ffffff;
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #egypt-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .pyramid-svg {
+      width: 180px;
+      height: 180px;
+      overflow: visible;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .sun {
+      animation: sunrise 2.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes sunrise {
+      0% {
+        transform: translateY(15px);
+        opacity: 0.3;
+      }
+
+      100% {
+        transform: translateY(-15px);
+        opacity: 1;
+      }
+    }
+
+    .loader-text {
+      color: #f1c40f;
+      font-family: Georgia, serif;
+      margin-top: 30px;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: pulseText 1.5s infinite;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .loader-progress {
+      width: min(360px, 80vw);
+      height: 12px;
+      margin-top: 18px;
+      border-radius: 999px;
+      background: #f1e5be;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.18);
+    }
+
+    .loader-progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #e67e22, #f1c40f);
+      transition: width 0.25s ease;
+    }
+
+    .loader-progress-value {
+      margin-top: 8px;
+      font-family: Georgia, serif;
+      font-size: 0.95rem;
+      color: #8a6d1f;
+      letter-spacing: 1px;
+    }
+
+    @keyframes pulseText {
+
+      0%,
+      100% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 15px rgba(241, 196, 15, 0.6);
+      }
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        if (window.localStorage.getItem('egyptLoaderSeen') === '1') {
+          document.documentElement.classList.add('loader-seen');
+        }
+      } catch (e) {
+      }
+    })();
+  </script>
 </head>
 
 <body
   class="l wt-home ac-i ac-n l-default l-d-border b-btn-r b-btn-s-l b-btn-dso b-btn-bw-1 img-d-r img-t-u img-h-n line-solid b-e-ds lbox-l   hb-on wnd-free-bar-limited  wnd-fe">
+  <div id="egypt-loader">
+    <svg class="pyramid-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="45" r="25" fill="#e67e22" class="sun" />
+      <polygon points="50,20 15,80 50,80" fill="#f1c40f" />
+      <polygon points="50,20 85,80 50,80" fill="#c29b0a" />
+      <path d="M0,80 Q25,75 50,80 T100,80 L100,100 L0,100 Z" fill="#b07d23" />
+    </svg>
+    <div class="loader-text">Vstupujete do starověkého Egypta...</div>
+    <div class="loader-progress" aria-hidden="true">
+      <div class="loader-progress-fill" id="egypt-loader-progress-fill"></div>
+    </div>
+    <div class="loader-progress-value" id="egypt-loader-progress-value">0%</div>
+  </div>
   <style>
     .more-text::before,
     .more-text::after,
@@ -1459,6 +1594,66 @@
 
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
       });
+    });
+  </script>
+  <script>
+    window.addEventListener('load', function () {
+      var loader = document.getElementById('egypt-loader');
+      var progressFill = document.getElementById('egypt-loader-progress-fill');
+      var progressValue = document.getElementById('egypt-loader-progress-value');
+      var progress = 0;
+      var progressInterval;
+
+      if (!loader) return;
+
+      try {
+        if (window.localStorage.getItem('egyptLoaderSeen') === '1') {
+          loader.parentNode.removeChild(loader);
+          return;
+        }
+      } catch (e) {
+      }
+
+      function renderProgress(value) {
+        if (progressFill) {
+          progressFill.style.width = value + '%';
+        }
+        if (progressValue) {
+          progressValue.textContent = value + '%';
+        }
+      }
+
+      progressInterval = setInterval(function () {
+        if (progress >= 92) {
+          clearInterval(progressInterval);
+          return;
+        }
+        progress += Math.floor(Math.random() * 6) + 2;
+        if (progress > 92) {
+          progress = 92;
+        }
+        renderProgress(progress);
+      }, 180);
+
+      renderProgress(progress);
+
+      setTimeout(function () {
+        clearInterval(progressInterval);
+        renderProgress(100);
+
+        setTimeout(function () {
+          loader.classList.add('hidden');
+          setTimeout(function () {
+            if (loader && loader.parentNode) {
+              try {
+                window.localStorage.setItem('egyptLoaderSeen', '1');
+              } catch (e) {
+              }
+              loader.parentNode.removeChild(loader);
+            }
+          }, 800);
+        }, 1300);
+      }, 2600);
     });
   </script>
 </body>
