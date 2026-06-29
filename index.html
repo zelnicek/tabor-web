@@ -601,6 +601,43 @@
                                     margin: 0;
                                   }
 
+                                  .camp-info-link-wrap {
+                                    text-align: center;
+                                    margin: 18px 0 10px;
+                                  }
+
+                                  .camp-info-link {
+                                    display: inline-flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: 10px;
+                                    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+                                    color: #ffffff !important;
+                                    font-family: 'Patrick Hand', cursive;
+                                    font-size: 1.35rem;
+                                    line-height: 1.2;
+                                    text-decoration: none;
+                                    padding: 14px 24px;
+                                    border-radius: 999px;
+                                    border: 2px solid rgba(255, 255, 255, 0.2);
+                                    box-shadow: 0 10px 24px rgba(27, 94, 32, 0.25);
+                                    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+                                  }
+
+                                  .camp-info-link:hover {
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 14px 30px rgba(27, 94, 32, 0.32);
+                                    filter: brightness(1.05);
+                                    color: #ffffff !important;
+                                  }
+
+                                  @media (max-width: 650px) {
+                                    .camp-info-link {
+                                      font-size: 1.1rem;
+                                      padding: 12px 18px;
+                                    }
+                                  }
+
                                   @media (max-width: 650px) {
                                     .status-text {
                                       font-size: 1.6rem;
@@ -610,6 +647,13 @@
 
                                 <div class="status-box">
                                   <p class="status-text">🌲 Máme plno, vidíme se v létě! ☀️</p>
+                                </div>
+
+                                <div class="camp-info-link-wrap">
+                                  <a class="camp-info-link" href="pdfs/A CO SI VZÍT S SEBOU NA TÁBOR.pdf"
+                                    target="_blank" rel="noopener noreferrer">
+                                    🎒 Co si vzít s sebou na tábor (PDF)
+                                  </a>
                                 </div>
                               </div>
                             </div>
