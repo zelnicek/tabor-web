@@ -356,36 +356,16 @@
       }
     }
 
-    /* Zlaty odlesk na text loga */
+    /* Logo text without shine */
     .logo-text-cell strong {
-      background: linear-gradient(120deg, #333333 35%, #d4af37 50%, #333333 65%);
-      background-size: 200% auto;
-      color: transparent !important;
-      -webkit-background-clip: text !important;
-      background-clip: text !important;
-      animation: logoShine 5s linear infinite;
-    }
-
-    @keyframes logoShine {
-      0% {
-        background-position: 200% center;
-      }
-
-      100% {
-        background-position: -200% center;
-      }
+      background: none !important;
+      color: inherit !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      animation: none !important;
     }
 
     /* Levitujici okridlene slunce */
-    .egypt-winged-sun {
-      display: inline-block;
-      width: 40px;
-      height: auto;
-      margin-left: 10px;
-      vertical-align: middle;
-      animation: floatSun 4s ease-in-out infinite;
-      filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
-    }
 
     @keyframes floatSun {
 
@@ -407,10 +387,6 @@
 
     /* Zmenseni slunce na mobilnich telefonech */
     @media (max-width: 480px) {
-      .egypt-winged-sun {
-        width: 28px;
-        margin-left: 5px;
-      }
     }
   </style>
   <script>window.checkAndChangeSvgColor = function (c) { try { var a = document.getElementById(c); if (a) { c = [["border", "borderColor"], ["outline", "outlineColor"], ["color", "color"]]; for (var h, b, d, f = [], e = 0, m = c.length; e < m; e++)if (h = window.getComputedStyle(a)[c[e][1]].replace(/\s/g, "").match(/^rgb[a]?\(([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3})/i)) { b = ""; for (var g = 1; 3 >= g; g++)b += ("0" + parseInt(h[g], 10).toString(16)).slice(-2); "0" === b.charAt(0) && (d = parseInt(b.substr(0, 2), 16), d = Math.max(16, d), b = d.toString(16) + b.slice(-4)); f.push(c[e][0] + "=" + b) } if (f.length) { var k = a.getAttribute("data-src"), l = k + (0 > k.indexOf("?") ? "?" : "&") + f.join("&"); a.src != l && (a.src = l, a.outerHTML = a.outerHTML) } } } catch (n) { } };</script>
@@ -429,36 +405,16 @@
       content: "•" !important;
     }
 
-    /* Zlaty odlesk na text loga */
+    /* Logo text without shine */
     .logo-text-cell strong {
-      background: linear-gradient(120deg, #333333 35%, #d4af37 50%, #333333 65%);
-      background-size: 200% auto;
-      color: transparent !important;
-      -webkit-background-clip: text !important;
-      background-clip: text !important;
-      animation: logoShine 5s linear infinite;
-    }
-
-    @keyframes logoShine {
-      0% {
-        background-position: 200% center;
-      }
-
-      100% {
-        background-position: -200% center;
-      }
+      background: none !important;
+      color: inherit !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      animation: none !important;
     }
 
     /* Levitujici okridlene slunce */
-    .egypt-winged-sun {
-      display: inline-block;
-      width: 40px;
-      height: auto;
-      margin-left: 10px;
-      vertical-align: middle;
-      animation: floatSun 4s ease-in-out infinite;
-      filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.15));
-    }
 
     @keyframes floatSun {
 
@@ -480,10 +436,6 @@
 
     /* Zmenseni slunce na mobilnich telefonech */
     @media (max-width: 480px) {
-      .egypt-winged-sun {
-        width: 28px;
-        margin-left: 5px;
-      }
     }
   </style>
 </head>
@@ -597,7 +549,7 @@
 
                               <div class="b-l-image logo-image">
                                 <div class="b-l-image-w logo-image-cell">
-                                  <img src="favicon_egypt.png" alt="Logo"
+                                  <img src="favicon.png" alt="Logo"
                                     style="max-height: 80px; width: auto; margin-right: 10px;">
                                 </div>
                               </div>
@@ -610,7 +562,6 @@
                                 <div class="b-l-text-w logo-text">
                                   <span class="b-l-text-c logo-text-cell">
                                     <strong>Tábor šlapanických divadelníků</strong>
-                                    <img class="egypt-winged-sun" src="ra.png" alt="Ra">
                                   </span>
                                 </div>
                               </div>
@@ -785,16 +736,6 @@
                                   }
                                 </style>
 
-                                <div class="status-box">
-                                  <p class="status-text">🌲 Tábor je už plný, uvidíme se na tábore! ☀️</p>
-                                </div>
-
-                                <div class="camp-info-link-wrap">
-                                  <a class="camp-info-link" href="pdfs/co-si-vzit-s-sebou-na-tabor.pdf" target="_blank"
-                                    rel="noopener noreferrer">
-                                    🎒 Co si vzít s sebou na tábor (PDF)
-                                  </a>
-                                </div>
                               </div>
                             </div>
                             <div class="cw cf">
@@ -1014,15 +955,11 @@
                                     </div>
                                   </div>
 
-                                  <div id="nature-finished" class="finished-message-nature"
-                                    style="display: none; margin-top: 20px;">
-                                    🔥 Táborák zapálen! Tábor začal! 🍄
-                                  </div>
                                 </div>
 
                                 <script>
-                                  // CÍLOVÝ DATUM: 4. července 2026 v 09:00 ráno
-                                  const targetDateNature = new Date("July 4, 2026 09:00:00").getTime();
+                                  // CÍLOVÝ DATUM: 3. července 2027 v 09:00 ráno
+                                  const targetDateNature = new Date("July 3, 2027 09:00:00").getTime();
 
                                   const timerNature = setInterval(function () {
                                     const now = new Date().getTime();
@@ -1042,7 +979,6 @@
                                       clearInterval(timerNature);
                                       document.querySelector(".nature-container").style.display = "none";
                                       document.querySelector(".nature-title").style.display = "none";
-                                      document.getElementById("nature-finished").style.display = "block";
                                     }
                                   }, 1000);
                                 </script>
@@ -1227,8 +1163,7 @@
                                         </div>
                                         <h2>
                                           <div class="ld">
-                                            <span class="ld-c"><strong>!!BUDE!!</strong> Víkendovka Strojatín 27. února
-                                              – 1. března 2026</span>
+                                            <span class="ld-c">Víkendovka Strojatín 27. února – 1. března 2026</span>
                                           </div>
                                         </h2>
                                       </div>
