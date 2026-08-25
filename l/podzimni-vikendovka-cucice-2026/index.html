@@ -463,6 +463,7 @@ body.l.wt-blogpost {
 				<input type="hidden" name="_next" value="https://www.taborslapanice.cz/l/podzimni-vikendovka-cucice-2026/index.html?odeslano=1">
 				<input type="hidden" name="Akce" value="Podzimní víkendovka Čučice 2. - 4. 10. 2026">
 				<input type="hidden" name="Počet dětí" id="tsd-pocet-deti" value="1">
+				<input type="hidden" name="_cc" id="tsd-cc" value="">
 				<input type="hidden" name="_autoresponse" id="tsd-autoresponse" value="Děkujeme za přihlášku na Podzimní víkendovku Čučice 2. – 4. 10. 2026. Ozveme se vám s bližšími informacemi k odjezdu a platbě.">
 				<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -980,6 +981,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	form.addEventListener('submit', function () {
 		var auto = document.getElementById('tsd-autoresponse');
 		if (auto) auto.value = shrnutiProRodice();
+
+		// kopie přihlášky rodiči (nezávisle na _autoresponse)
+		var cc = document.getElementById('tsd-cc');
+		var mail = form.elements['email'];
+		if (cc && mail) cc.value = mail.value.trim();
 		var btn = form.querySelector('button[type=submit]');
 		if (btn) { btn.disabled = true; btn.textContent = 'Odesílám…'; }
 	});
