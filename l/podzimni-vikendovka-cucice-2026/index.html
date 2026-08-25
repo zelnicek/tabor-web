@@ -920,6 +920,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	/* ====== Shrnující e-mail, který dostane rodič ====== */
 
+	function sestavPredmet() {
+		var rodic = (form.elements['Jméno a příjmení rodiče'].value || '').trim();
+		var deti = [];
+		Array.prototype.forEach.call(deti_jmena(), function (v) { if (v) deti.push(v); });
+
+		var kdo = deti.length ? deti[0] : '';
+		if (deti.length === 2) { kdo = deti[0] + ' a ' + deti[1]; }
+		else if (deti.length > 2) { kdo = deti[0] + ' a další ' + (deti.length - 1); }
+
+		var predmet = 'Přihláška Čučice';
+		if (rodic) predmet += ' – ' + rodic;
+		if (kdo) predmet += ' (' + kdo + ')';
+		return predmet;
+	}
+
+	function deti_jmena() {
+		return Array.prototype.map.call(
+			deti.querySelectorAll('[data-field="jméno a příjmení"]'),
+			function (f) { return (f.value || '').trim(); }
+		);
+	}
+
 	function shrnutiProRodice() {
 		var out = [];
 		out.push('Dobrý den,');
@@ -1035,6 +1057,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		var cc = document.getElementById('tsd-cc');
 		var mail = form.elements['email'];
 		if (cc && mail) cc.value = mail.value.trim();
+
+		// předmět se jménem rodiče a dětmi, ať je v schránce hned vidět, o koho jde
+		var predmet = form.elements['_subject'];
+		if (predmet) predmet.value = sestavPredmet();
 
 		var btn = form.querySelector('button[type=submit]');
 		if (btn) { btn.disabled = true; btn.textContent = 'Odesílám…'; }
