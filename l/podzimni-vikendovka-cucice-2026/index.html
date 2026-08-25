@@ -214,6 +214,8 @@ body.l.wt-blogpost {
 .tsd-alert[hidden]{display:none}
 .tsd-alert-ok{background:#e6f5ea;border:1px solid #9ed4ae;color:#155f2c}
 .tsd-alert-ok span{display:block;margin-top:5px;font-size:.94em}
+.tsd-btn.tsd-btn-znovu{margin-top:14px;padding:11px 22px;font-size:.98em;background:var(--tsd-green);border-color:var(--tsd-green)}
+.tsd-btn.tsd-btn-znovu:hover{background:#186e2f;border-color:#186e2f}
 .tsd-alert-warn{background:#fdf3e3;border:1px solid #e6c68a;color:#7a5310}
 .tsd-alert-warn span{display:block;margin-top:5px;font-size:.94em}
 
@@ -450,6 +452,8 @@ body.l.wt-blogpost {
 			<div id="tsd-success" class="tsd-alert tsd-alert-ok" hidden>
 				<strong>Přihláška byla odeslána. Děkujeme!</strong>
 				<span>Ozveme se vám na uvedený e-mail. Pokud vám do pár dní nepřijde žádná odpověď, dejte nám prosím vědět na vikendovky@taborslapanice.cz.</span>
+				<span>Potřebujete přihlásit ještě někoho dalšího? Formulář se vám znovu otevře prázdný.</span>
+				<button type="button" id="tsd-znovu" class="tsd-btn tsd-btn-znovu">Odeslat další přihlášku</button>
 			</div>
 
 			<noscript>
@@ -680,19 +684,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
 	var DNY = ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'];
 
-	/* ---------- Po odeslání (?odeslano=1) ukážeme poděkování ---------- */
-	if (/[?&]odeslano=1/.test(window.location.search)) {
-		var ok = document.getElementById('tsd-success');
-		if (ok) ok.hidden = false;
-		form.style.display = 'none';
-		var wrap = document.getElementById('prihlaska');
-		if (wrap) wrap.scrollIntoView();
-		return;
-	}
-
 	/* ================= Český kalendář pro datum narození ================= */
-
-	function dvaMistne(n) { return (n < 10 ? '0' : '') + n; }
 
 	// "12. 4. 2015" / "12.4.2015" -> Date, jinak null
 	function parseCz(text) {
@@ -977,6 +969,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		return out.join('\n');
 	}
+
+	/* ====== Po odeslání: poděkování + možnost poslat další ====== */
+
+	var uspech = document.getElementById('tsd-success');
+	var wrap = document.getElementById('prihlaska');
+
+	function znovuOtevriFormular() {
+		if (uspech) uspech.hidden = true;
+		form.reset();
+		deti.innerHTML = '';
+		pridejDite(false);
+		form.style.display = '';
+		var btn = form.querySelector('button[type=submit]');
+		if (btn) { btn.disabled = false; btn.textContent = 'Odeslat přihlášku'; }
+		// ať se po obnovení stránky neukáže poděkování znovu
+		if (window.history && window.history.replaceState) {
+			window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+		}
+		if (wrap) wrap.scrollIntoView();
+	}
+
+	if (/[?&]odeslano=1/.test(window.location.search)) {
+		if (uspech) uspech.hidden = false;
+		form.style.display = 'none';
+		if (wrap) wrap.scrollIntoView();
+	}
+
+	var znovuBtn = document.getElementById('tsd-znovu');
+	if (znovuBtn) znovuBtn.addEventListener('click', znovuOtevriFormular);
 
 	form.addEventListener('submit', function () {
 		var auto = document.getElementById('tsd-autoresponse');
