@@ -439,24 +439,27 @@
     }
   </style>
 <style>
-/* upozornění na otevřené přihlášky (úvodní strana) */
-.tsdban{max-width:720px;margin:0 auto;padding:26px 26px 28px;text-align:center;
-  background:linear-gradient(180deg,#f3f8fc 0%,#e8f1f9 100%);
-  border:2px solid #0f6cb6;border-radius:14px;box-shadow:0 4px 18px rgba(15,108,182,.14)}
-.tsdban-tag{display:inline-block;margin:0 0 10px;padding:5px 14px;border-radius:20px;
-  background:#d92d20;color:#fff;font-weight:800;font-size:.92em;letter-spacing:.03em}
-.b-text-c .tsdban-title{margin:0 0 8px!important;font-size:1.5em!important;line-height:1.3!important;
-  font-weight:700!important;color:#0f6cb6!important}
-.b-text-c .tsdban-sub{margin:0 0 6px!important;font-size:1.08em!important;color:#1d2b3a!important}
-.b-text-c .tsdban-dl{margin:0 0 18px!important;font-size:1em!important;color:#d92d20!important;font-weight:600}
-.b-text-c .tsdban-act{margin:0!important}
-.tsdban-btn{display:inline-block;padding:14px 30px;font-weight:700;font-size:1.04em;line-height:1;
-  color:#fff!important;background:#0f6cb6;border-radius:7px;text-decoration:none!important}
-.tsdban-btn:hover{background:#0b578f;color:#fff!important}
+/* malé vyskakovací upozornění na otevřené přihlášky */
+#tsdpop{position:fixed;right:20px;bottom:20px;z-index:11000;width:290px;max-width:calc(100vw - 32px);
+  padding:14px 16px 15px;background:#fff;border:1px solid #d8dee6;border-left:4px solid #0f6cb6;
+  border-radius:10px;box-shadow:0 8px 26px rgba(20,35,60,.22);
+  font-family:"Quicksand Flex",Quicksand,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:14px;line-height:1.45;color:#1d2b3a;
+  opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease}
+#tsdpop.tsdpop-in{opacity:1;transform:translateY(0)}
+#tsdpop[hidden]{display:none}
+#tsdpop .tsdpop-tag{display:inline-block;margin:0 0 7px;padding:2px 9px;border-radius:12px;
+  background:#d92d20;color:#fff;font-weight:800;font-size:11px;letter-spacing:.04em}
+#tsdpop .tsdpop-t{margin:0 0 4px;font-weight:700;font-size:15px;color:#0f6cb6}
+#tsdpop .tsdpop-s{margin:0 0 10px;font-size:13px;color:#5c6b7d}
+#tsdpop .tsdpop-a{display:inline-block;padding:8px 16px;background:#0f6cb6;color:#fff;
+  border-radius:6px;font-weight:700;font-size:13px;text-decoration:none}
+#tsdpop .tsdpop-a:hover{background:#0b578f;color:#fff;text-decoration:none}
+#tsdpop .tsdpop-x{position:absolute;top:6px;right:8px;width:26px;height:26px;padding:0;
+  background:none;border:0;border-radius:50%;color:#8b97a5;font-size:17px;line-height:1;cursor:pointer}
+#tsdpop .tsdpop-x:hover{background:#f1f4f8;color:#1d2b3a}
 @media screen and (max-width:600px){
-  .tsdban{padding:20px 16px 22px}
-  .b-text-c .tsdban-title{font-size:1.26em!important}
-  .tsdban-btn{display:block}
+  #tsdpop{right:12px;left:12px;bottom:12px;width:auto}
 }
 </style>
 </head>
@@ -1005,41 +1008,6 @@
                                 </script>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <section class="s s-basic cf sc-w   wnd-w-wide wnd-s-normal wnd-h-auto">
-              <div class="s-w cf">
-                <div class="s-o s-fs cf">
-                  <div class="s-bg cf">
-                    <div class="s-bg-l"></div>
-                  </div>
-                  <div class="s-c s-fs cf">
-                    <div class="ez cf wnd-no-cols">
-                      <div class="ez-c">
-                        <div class="b b-text cf">
-                          <div class="b-c b-text-c b-s b-s-t60 b-s-b60 b-cs cf">
-                            <div id="tsdban" class="tsdban" data-do="2026-09-18">
-                              <span class="tsdban-tag">!!BUDE!!</span>
-                              <p class="tsdban-title">Přihlášky na podzimní víkendovku jsou otevřené</p>
-                              <p class="tsdban-sub">Čučice <strong>2. – 4. 10. 2026</strong> &middot; skautská chata &middot; <strong>1&nbsp;000,- Kč</strong></p>
-                              <p class="tsdban-dl">Přihlášky přijímáme do <strong>pátku 18. 9. 2026</strong></p>
-                              <p class="tsdban-act"><a class="tsdban-btn" href="l/podzimni-vikendovka-cucice-2026/index.html">Vyplnit přihlášku online</a></p>
-                            </div>
-                            <script>
-                              // Po uzavěrce upozornění samo zmizí (datum je v data-do výše).
-                              (function () {
-                                var b = document.getElementById('tsdban');
-                                if (!b) return;
-                                var do_ = new Date(b.dataset.do + 'T23:59:59');
-                                if (new Date() > do_) b.style.display = 'none';
-                              })();
-                            </script>
                           </div>
                         </div>
                       </div>
@@ -1731,6 +1699,33 @@
       });
     });
   </script>
-</body>
+
+    <div id="tsdpop" data-do="2026-09-18" hidden>
+      <button type="button" class="tsdpop-x" aria-label="Zavřít">&times;</button>
+      <span class="tsdpop-tag">!!BUDE!!</span>
+      <p class="tsdpop-t">Přihlášky na víkendovku jsou otevřené</p>
+      <p class="tsdpop-s">Čučice 2. – 4. 10. 2026 &middot; přihlaste se do 18. 9.</p>
+      <a class="tsdpop-a" href="l/podzimni-vikendovka-cucice-2026/index.html">Přihlásit dítě</a>
+    </div>
+    <script>
+      (function () {
+        var p = document.getElementById('tsdpop');
+        if (!p) return;
+        var klic = 'tsdpop-cucice-2026';
+        // po uzávěrce (data-do) a po zavření uživatelem už se neukazuje
+        if (new Date() > new Date(p.dataset.do + 'T23:59:59')) return;
+        try { if (localStorage.getItem(klic)) return; } catch (e) {}
+        setTimeout(function () {
+          p.hidden = false;
+          requestAnimationFrame(function () { p.className = 'tsdpop-in'; });
+        }, 1500);
+        p.querySelector('.tsdpop-x').addEventListener('click', function () {
+          p.className = '';
+          setTimeout(function () { p.hidden = true; }, 350);
+          try { localStorage.setItem(klic, '1'); } catch (e) {}
+        });
+      })();
+    </script>
+  </body>
 
 </html>
