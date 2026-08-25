@@ -454,7 +454,7 @@ body.l.wt-blogpost {
 			<div id="tsd-error" class="tsd-alert tsd-alert-err" hidden>
 				<strong>Přihlášku se nepodařilo odeslat.</strong>
 				<span id="tsd-error-detail"></span>
-				<span>Zkuste to prosím ještě jednou, nebo použijte tlačítko „Raději odeslat e-mailem“ níže. Můžete nám také zavolat na 731 507 034.</span>
+				<span>Zkuste to prosím ještě jednou. Kdyby to nešlo ani napodruhé, napište na vikendovky@taborslapanice.cz nebo zavolejte Zuzaně Hlinové na 731 507 034 – přihlásíme dítě za vás.</span>
 			</div>
 
 			<div id="tsd-success" class="tsd-alert tsd-alert-ok" hidden>
@@ -526,7 +526,6 @@ body.l.wt-blogpost {
 
 				<div class="tsd-actions">
 					<button type="submit" class="tsd-btn">Odeslat přihlášku</button>
-					<a id="tsd-mailto" class="tsd-btn tsd-btn-alt" href="mailto:vikendovky@taborslapanice.cz">Raději odeslat e-mailem</a>
 				</div>
 				<p class="tsd-note">Přihláška se odešle na e-mail <strong class="tsd-key">vikendovky@taborslapanice.cz</strong> a kopii dostanete i vy. Pole označená <b>*</b> jsou povinná.</p>
 			</form>
@@ -898,26 +897,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	pridejDite(false);
 	addBtn.addEventListener('click', function () { pridejDite(true); });
-
-	/* ============ Záložní varianta: předvyplněný e-mail ============ */
-
-	var mailto = document.getElementById('tsd-mailto');
-	if (mailto) {
-		mailto.addEventListener('click', function (e) {
-			e.preventDefault();
-			var lines = ['NÁVRATKA – Podzimní víkend Čučice 2. – 4. 10. 2026', ''];
-			var fields = form.querySelectorAll('input[name], select[name], textarea[name]');
-			Array.prototype.forEach.call(fields, function (f) {
-				if (f.name.charAt(0) === '_' || f.type === 'hidden') return;
-				var val = f.type === 'checkbox' ? (f.checked ? 'Ano' : 'Ne') : f.value.trim();
-				if (!val) return;
-				lines.push((f.name === 'email' ? 'E-mail rodiče' : f.name) + ': ' + val);
-			});
-			window.location.href = 'mailto:vikendovky@taborslapanice.cz'
-				+ '?subject=' + encodeURIComponent('Přihláška – Podzimní víkendovka Čučice 2.–4. 10. 2026')
-				+ '&body=' + encodeURIComponent(lines.join('\n'));
-		});
-	}
 
 	/* ====== Shrnující e-mail, který dostane rodič ====== */
 
