@@ -471,6 +471,7 @@ body.l.wt-blogpost {
 			<form id="tsd-prihlaska" class="tsd-form" action="https://formsubmit.co/vikendovky@taborslapanice.cz" method="POST">
 				<input type="hidden" name="_subject" value="Přihláška – Podzimní víkendovka Čučice 2.–4. 10. 2026">
 				<input type="hidden" name="_template" value="table">
+				<input type="hidden" name="Pro rodiče" value="Toto je kopie vaší přihlášky pouze pro kontrolu údajů. Na tento e-mail neodpovídejte – nikdo ho nečte. Potřebujete-li něco upřesnit nebo opravit, napište na vikendovky@taborslapanice.cz nebo volejte 731 507 034.">
 				<input type="hidden" name="Akce" value="Podzimní víkendovka Čučice 2. - 4. 10. 2026">
 				<input type="hidden" name="Počet dětí" id="tsd-pocet-deti" value="1">
 				<input type="hidden" name="_cc" id="tsd-cc" value="">
@@ -932,6 +933,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		var predmet = 'Přihláška Čučice';
 		if (rodic) predmet += ' – ' + rodic;
 		if (kdo) predmet += ' (' + kdo + ')';
+		// rodič dostává tutéž zprávu v kopii, proto upozornění rovnou v předmětu
+		predmet += ' – kontrola údajů, neodpovídejte';
 		return predmet;
 	}
 
