@@ -217,6 +217,8 @@ body.l.wt-blogpost {
 .tsd-btn.tsd-btn-znovu{margin-top:14px;padding:11px 22px;font-size:.98em;background:var(--tsd-green);border-color:var(--tsd-green)}
 .tsd-btn.tsd-btn-znovu:hover{background:#186e2f;border-color:#186e2f}
 .tsd-alert-warn{background:#fdf3e3;border:1px solid #e6c68a;color:#7a5310}
+.tsd-alert-err{background:#fdecea;border:1px solid #e6a9a2;color:#8a2318}
+.tsd-alert-err span{display:block;margin-top:5px;font-size:.94em}
 .tsd-alert-warn span{display:block;margin-top:5px;font-size:.94em}
 
 @media screen and (max-width:600px){
@@ -449,6 +451,12 @@ body.l.wt-blogpost {
 				<p class="tsd-deadline">Přihlášku prosím odešlete nejpozději do <strong class="tsd-hl-hot">pátku 18. 9. 2026</strong>. Když se nahlásí dostatečný počet dětí, včas zašleme bližší informace k odjezdu a platbě. Děkujeme!</p>
 			</div>
 
+			<div id="tsd-error" class="tsd-alert tsd-alert-err" hidden>
+				<strong>Přihlášku se nepodařilo odeslat.</strong>
+				<span id="tsd-error-detail"></span>
+				<span>Zkuste to prosím ještě jednou, nebo použijte tlačítko „Raději odeslat e-mailem“ níže. Můžete nám také zavolat na 731 507 034.</span>
+			</div>
+
 			<div id="tsd-success" class="tsd-alert tsd-alert-ok" hidden>
 				<strong>Přihláška byla odeslána. Děkujeme!</strong>
 				<span>Ozveme se vám na uvedený e-mail. Pokud vám do pár dní nepřijde žádná odpověď, dejte nám prosím vědět na vikendovky@taborslapanice.cz.</span>
@@ -463,7 +471,6 @@ body.l.wt-blogpost {
 			<form id="tsd-prihlaska" class="tsd-form" action="https://formsubmit.co/vikendovky@taborslapanice.cz" method="POST">
 				<input type="hidden" name="_subject" value="Přihláška – Podzimní víkendovka Čučice 2.–4. 10. 2026">
 				<input type="hidden" name="_template" value="table">
-				<input type="hidden" name="_next" value="https://www.taborslapanice.cz/l/podzimni-vikendovka-cucice-2026-odeslano/">
 				<input type="hidden" name="Akce" value="Podzimní víkendovka Čučice 2. - 4. 10. 2026">
 				<input type="hidden" name="Počet dětí" id="tsd-pocet-deti" value="1">
 				<input type="hidden" name="_cc" id="tsd-cc" value="">
@@ -520,7 +527,7 @@ body.l.wt-blogpost {
 					<button type="submit" class="tsd-btn">Odeslat přihlášku</button>
 					<a id="tsd-mailto" class="tsd-btn tsd-btn-alt" href="mailto:vikendovky@taborslapanice.cz">Raději odeslat e-mailem</a>
 				</div>
-				<p class="tsd-note">Přihláška se odešle na e-mail <strong class="tsd-key">vikendovky@taborslapanice.cz</strong> a kopii dostanete i vy. Pole označená <b>*</b> jsou povinná.<br>Po odeslání se zobrazí krátké ověření, že nejste robot — potvrďte ho, teprve pak se přihláška odešle.</p>
+				<p class="tsd-note">Přihláška se odešle na e-mail <strong class="tsd-key">vikendovky@taborslapanice.cz</strong> a kopii dostanete i vy. Pole označená <b>*</b> jsou povinná.</p>
 			</form>
 
 			<template id="tsd-child-tpl">
@@ -998,16 +1005,55 @@ document.addEventListener('DOMContentLoaded', function() {
 	var znovuBtn = document.getElementById('tsd-znovu');
 	if (znovuBtn) znovuBtn.addEventListener('click', znovuOtevriFormular);
 
-	form.addEventListener('submit', function () {
+	var chyba = document.getElementById('tsd-error');
+	var chybaDetail = document.getElementById('tsd-error-detail');
+
+	function ukazPodekovani() {
+		if (chyba) chyba.hidden = true;
+		if (uspech) uspech.hidden = false;
+		form.style.display = 'none';
+		if (wrap) wrap.scrollIntoView();
+	}
+
+	function ukazChybu(text) {
+		if (chybaDetail) chybaDetail.textContent = text || '';
+		if (chyba) chyba.hidden = false;
+		var btn = form.querySelector('button[type=submit]');
+		if (btn) { btn.disabled = false; btn.textContent = 'Odeslat přihlášku'; }
+		if (wrap) wrap.scrollIntoView();
+	}
+
+	// Odesíláme na pozadí, aby rodič zůstal na našich stránkách
+	// (přesměrování přes _next FormSubmit se zapnutou captchou ignoruje).
+	form.addEventListener('submit', function (e) {
+		e.preventDefault();
+
 		var auto = document.getElementById('tsd-autoresponse');
 		if (auto) auto.value = shrnutiProRodice();
 
-		// kopie přihlášky rodiči (nezávisle na _autoresponse)
+		// kopie přihlášky rodiči
 		var cc = document.getElementById('tsd-cc');
 		var mail = form.elements['email'];
 		if (cc && mail) cc.value = mail.value.trim();
+
 		var btn = form.querySelector('button[type=submit]');
 		if (btn) { btn.disabled = true; btn.textContent = 'Odesílám…'; }
+		if (chyba) chyba.hidden = true;
+
+		fetch('https://formsubmit.co/ajax/vikendovky@taborslapanice.cz', {
+			method: 'POST',
+			headers: { 'Accept': 'application/json' },
+			body: new FormData(form)
+		})
+			.then(function (r) { return r.json().catch(function () { return { success: r.ok }; }); })
+			.then(function (data) {
+				var ok = data && (data.success === true || data.success === 'true');
+				if (ok) { ukazPodekovani(); }
+				else { ukazChybu(data && data.message ? data.message : ''); }
+			})
+			.catch(function () {
+				ukazChybu('Nepodařilo se spojit se serverem – zkontrolujte prosím připojení k internetu.');
+			});
 	});
 })();
 </script>
