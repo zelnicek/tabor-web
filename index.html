@@ -454,9 +454,11 @@
 #tsdpop.tsdpop-in .tsdpop-card{transform:none}
 #tsdpop .tsdpop-tag{display:inline-block;margin:0 0 16px;padding:6px 16px;border-radius:20px;
   background:#d92d20;color:#fff;font-weight:800;font-size:14px;letter-spacing:.05em}
+#tsdpop .tsdpop-tag-plno{background:#1f8a3b}
 #tsdpop .tsdpop-t{margin:0 0 12px;font-weight:700;font-size:27px;line-height:1.25;color:#0f6cb6}
 #tsdpop .tsdpop-s{margin:0 0 6px;font-size:18px;line-height:1.5;color:#1d2b3a}
 #tsdpop .tsdpop-dl{margin:0 0 26px;font-size:16px;font-weight:700;color:#d92d20}
+#tsdpop .tsdpop-dl-ok{color:#1f8a3b}
 #tsdpop .tsdpop-a{display:inline-block;padding:16px 38px;background:#0f6cb6;color:#fff;
   border-radius:8px;font-weight:700;font-size:17px;text-decoration:none}
 #tsdpop .tsdpop-a:hover{background:#0b578f;color:#fff;text-decoration:none}
@@ -1743,19 +1745,19 @@ body.tsdpop-open{overflow:hidden}
     <div id="tsdpop" data-do="2026-09-18" hidden role="dialog" aria-modal="true" aria-labelledby="tsdpop-t">
       <div class="tsdpop-card">
         <button type="button" class="tsdpop-x" aria-label="Zavřít">&times;</button>
-        <span class="tsdpop-tag">!!BUDE!!</span>
-        <p class="tsdpop-t" id="tsdpop-t">Přihlášky na podzimní víkendovku jsou otevřené</p>
+        <span class="tsdpop-tag tsdpop-tag-plno">PLNO</span>
+        <p class="tsdpop-t" id="tsdpop-t">Podzimní víkendovka je obsazená</p>
         <p class="tsdpop-s">Čučice <strong>2. – 4. 10. 2026</strong></p>
-        <p class="tsdpop-dl">Přihlaste se do pátku 18. 9. 2026</p>
-        <a class="tsdpop-a" href="l/podzimni-vikendovka-cucice-2026/index.html">Vyplnit přihlášku online</a>
-        <button type="button" class="tsdpop-later">Teď ne, děkuji</button>
+        <p class="tsdpop-dl tsdpop-dl-ok">Děkujeme za zájem, moc se na všechny těšíme!</p>
+        <a class="tsdpop-a" href="l/podzimni-vikendovka-cucice-2026/index.html">Informace k akci</a>
+        <button type="button" class="tsdpop-later">Zavřít</button>
       </div>
     </div>
     <script>
       (function () {
         var p = document.getElementById('tsdpop');
         if (!p) return;
-        var klic = 'tsdpop-cucice-2026';
+        var klic = 'tsdpop-cucice-2026-plno';
         var ZNOVU_PO = 3 * 24 * 60 * 60 * 1000; // po zavření se připomene za tři dny
 
         // po uzávěrce (data-do) se neukazuje vůbec

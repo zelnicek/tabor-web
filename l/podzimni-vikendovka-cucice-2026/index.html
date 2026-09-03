@@ -113,121 +113,30 @@ body.l.wt-blogpost {
 </style>
 
 <style>
-/* ===== Podzimní víkendovka Čučice 2026 – článek + online přihláška ===== */
-:root{
-	--tsd-accent:#0f6cb6;      /* sytá modrá – klíčové údaje */
-	--tsd-hot:#d92d20;         /* sytá červená – termíny, upozornění */
-	--tsd-green:#1f8a3b;       /* sytá zelená – cena, pozitivní */
-	--tsd-ink:#1d2b3a;
-	--tsd-muted:#5c6b7d;
-	--tsd-line:#d8dee6;
-}
-
-/* --- text článku: o něco větší a čitelnější --- */
-.wt-blogpost .b-text-c p,
-.wt-blogpost .b-text-c li{font-size:1.12em!important;line-height:1.68!important;color:var(--tsd-ink)}
+/* ===== Podzimní víkendovka Čučice 2026 — obsazeno ===== */
+:root{--tsd-accent:#0f6cb6;--tsd-hot:#d92d20;--tsd-green:#1f8a3b;--tsd-ink:#1d2b3a;--tsd-muted:#5c6b7d;--tsd-line:#d8dee6}
+.tsd-hl{color:var(--tsd-accent);font-weight:700}
+.tsd-key{color:var(--tsd-hot);font-weight:700}
+.tsd-hl-green{color:var(--tsd-green)!important;font-weight:700}
+.tsd-bude{color:var(--tsd-hot);font-weight:800;letter-spacing:.02em;white-space:nowrap}
 .wt-blogpost .b-text-c .tsd-perex{font-size:1.26em!important;line-height:1.62!important}
 .wt-blogpost .b-text-c .tsd-h{font-size:1.5em!important;margin:1.5em 0 .55em!important;color:var(--tsd-accent)!important;font-weight:700!important}
-.tsd-hl{color:var(--tsd-accent)!important;font-weight:700}
-.tsd-hl-hot{color:var(--tsd-hot)!important;font-weight:700}
-.tsd-hl-green{color:var(--tsd-green)!important;font-weight:700}
-.tsd-key{color:var(--tsd-ink)!important;font-weight:700}
-
-/* titulek s "!!BUDE!!" */
-.tsd-bude{color:var(--tsd-hot);font-weight:800;letter-spacing:.02em;white-space:nowrap}
-
 .tsd-info{margin:0 0 4px}
 .tsd-info .tsd-info-row{position:relative;margin:0 0 10px 22px!important;padding:0!important}
 .tsd-info .tsd-info-row:before{content:"";position:absolute;left:-20px;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--tsd-accent)}
 .tsd-pdf a{font-weight:700;font-size:1.08em}
-
-/* --- formulář --- */
-.tsd-form-wrap{max-width:820px;margin:10px auto 0;padding:30px 28px 32px;border:1px solid var(--tsd-line);border-radius:14px;background:#fbfcfd;box-shadow:0 3px 16px rgba(30,45,70,.08);text-align:left}
-.wt-blogpost .b-text-c .tsd-form-title{font-size:1.6em!important;margin:0 0 6px!important;color:var(--tsd-accent)!important;font-weight:700!important}
-.wt-blogpost .b-text-c .tsd-lead{margin:0 0 14px!important;font-weight:600}
-.wt-blogpost .b-text-c .tsd-deadline{margin:0!important;padding:12px 16px;background:#fdecea;border-left:5px solid var(--tsd-hot);border-radius:6px;font-size:1.06em!important}
-
-.tsd-fieldset{border:0;margin:26px 0 0;padding:0}
-.tsd-fieldset legend{display:flex;align-items:center;gap:12px;padding:0;margin:0 0 12px;width:100%;padding-bottom:8px;
-	font-weight:700;font-size:1.18em;color:var(--tsd-accent);border-bottom:2px solid #e2e8f0}
-.tsd-child-title{flex:1 1 auto}
-.tsd-child-remove{flex:0 0 auto;padding:5px 12px;font:inherit;font-size:.72em;font-weight:600;color:var(--tsd-hot);
-	background:#fff;border:1px solid #f0c4c0;border-radius:20px;cursor:pointer}
-.tsd-child-remove:hover{background:#fdecea}
-.tsd-child:first-of-type .tsd-child-remove[hidden],.tsd-child-remove[hidden]{display:none}
-
-.tsd-row{display:flex;flex-wrap:wrap;gap:0 20px}
-.tsd-row>.tsd-field{flex:1 1 250px;min-width:0}
-.tsd-field{display:block;margin:0 0 16px}
-.tsd-label{display:block;margin:0 0 6px;font-size:1em;font-weight:600;color:var(--tsd-ink)}
-.tsd-label b{color:var(--tsd-hot);font-weight:700}
-.tsd-hint{display:block;margin-top:5px;font-size:.88em;color:var(--tsd-muted);font-weight:400;line-height:1.4}
-.tsd-form input[type=text],.tsd-form input[type=tel],.tsd-form input[type=email],.tsd-form select,.tsd-form textarea{
-	display:block;width:100%;box-sizing:border-box;padding:11px 13px;font:inherit;font-size:1.02em;color:var(--tsd-ink);
-	background:#fff;border:1px solid #bcc6d2;border-radius:7px;-webkit-appearance:none;appearance:none}
-.tsd-form select{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23556' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:12px;padding-right:36px}
-.tsd-form textarea{resize:vertical;min-height:60px}
-.tsd-form input:focus,.tsd-form select:focus,.tsd-form textarea:focus{outline:0;border-color:var(--tsd-accent);box-shadow:0 0 0 3px rgba(15,108,182,.18)}
-.tsd-form input:user-invalid,.tsd-form select:user-invalid,.tsd-form textarea:user-invalid{border-color:#e08a83}
-
-/* datum + český kalendář */
-.tsd-datefield{position:relative}
-.tsd-datefield .tsd-date-input{padding-right:46px}
-.tsd-date-btn{position:absolute;top:0;right:0;height:100%;width:42px;display:flex;align-items:center;justify-content:center;
-	font-size:1.05em;line-height:1;background:transparent;border:0;border-radius:0 7px 7px 0;cursor:pointer}
-.tsd-date-btn:hover{background:#eef4fa}
-.tsd-cal{position:absolute;z-index:60;top:calc(100% + 6px);left:0;width:290px;padding:12px;
-	background:#fff;border:1px solid var(--tsd-line);border-radius:10px;box-shadow:0 8px 26px rgba(20,35,60,.18)}
-.tsd-cal[hidden]{display:none}
-.tsd-cal-head{display:flex;align-items:center;gap:6px;margin:0 0 10px}
-.tsd-cal-nav{flex:0 0 auto;width:30px;height:30px;font:inherit;font-size:1em;line-height:1;color:var(--tsd-accent);
-	background:#eef4fa;border:0;border-radius:6px;cursor:pointer}
-.tsd-cal-nav:hover{background:#dbe8f5}
-.tsd-cal-head select{flex:1 1 auto;width:auto!important;padding:6px 8px!important;font-size:.95em!important;border-radius:6px!important}
-.tsd-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.tsd-cal-dow{padding:4px 0;text-align:center;font-size:.78em;font-weight:700;color:var(--tsd-muted)}
-.tsd-cal-day{padding:7px 0;font:inherit;font-size:.92em;color:var(--tsd-ink);background:transparent;border:0;border-radius:6px;cursor:pointer}
-.tsd-cal-day:hover{background:#eef4fa}
-.tsd-cal-day.is-empty{visibility:hidden;cursor:default}
-.tsd-cal-day.is-sel{background:var(--tsd-accent);color:#fff;font-weight:700}
-.tsd-cal-foot{margin:10px 0 0;text-align:right}
-.tsd-cal-close{padding:6px 12px;font:inherit;font-size:.86em;color:var(--tsd-muted);background:#f1f4f8;border:0;border-radius:6px;cursor:pointer}
-
-.tsd-add-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:20px 0 4px;padding:14px 16px;
-	background:#eef4fa;border:1px dashed #a9c6e0;border-radius:10px}
-.tsd-add-note{flex:1 1 220px;font-size:.92em;color:var(--tsd-muted)}
-.tsd-btn.tsd-btn-add{padding:10px 18px;font-size:.96em;background:var(--tsd-green);border-color:var(--tsd-green)}
-.tsd-btn.tsd-btn-add:hover{background:#186e2f;border-color:#186e2f}
-
-.tsd-check{display:flex;align-items:flex-start;gap:12px;margin:26px 0 0;font-size:1em;line-height:1.5}
-.tsd-check input{margin-top:3px;width:20px;height:20px;flex:0 0 auto;accent-color:var(--tsd-accent)}
-.tsd-check b{color:var(--tsd-hot)}
-.tsd-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:24px 0 0}
-.tsd-btn{display:inline-block;padding:14px 30px;font:inherit;font-weight:700;font-size:1.04em;line-height:1;color:#fff;
-	background:var(--tsd-accent);border:1px solid var(--tsd-accent);border-radius:7px;cursor:pointer;text-decoration:none;text-align:center}
-.tsd-btn:hover{background:#0b578f;border-color:#0b578f;color:#fff;text-decoration:none}
-.tsd-btn[disabled]{opacity:.6;cursor:default}
-.tsd-btn-alt{background:transparent;color:var(--tsd-accent)}
-.tsd-btn-alt:hover{background:#eef4fa;color:#0b578f}
-.wt-blogpost .b-text-c .tsd-note{margin:16px 0 0!important;font-size:.92em!important;color:var(--tsd-muted)}
-.tsd-alert{display:block;margin:0 0 22px;padding:16px 18px;border-radius:10px;line-height:1.55;font-size:1.04em}
-.tsd-alert[hidden]{display:none}
-.tsd-alert-ok{background:#e6f5ea;border:1px solid #9ed4ae;color:#155f2c}
-.tsd-alert-ok span{display:block;margin-top:5px;font-size:.94em}
-.tsd-btn.tsd-btn-znovu{margin-top:14px;padding:11px 22px;font-size:.98em;background:var(--tsd-green);border-color:var(--tsd-green)}
-.tsd-btn.tsd-btn-znovu:hover{background:#186e2f;border-color:#186e2f}
-.tsd-alert-warn{background:#fdf3e3;border:1px solid #e6c68a;color:#7a5310}
-.tsd-alert-err{background:#fdecea;border:1px solid #e6a9a2;color:#8a2318}
-.tsd-alert-err span{display:block;margin-top:5px;font-size:.94em}
-.tsd-alert-warn span{display:block;margin-top:5px;font-size:.94em}
-
-@media screen and (max-width:600px){
-	.tsd-form-wrap{padding:20px 16px 24px}
-	.tsd-row{display:block}
-	.tsd-actions .tsd-btn{width:100%}
-	.tsd-cal{width:min(290px,calc(100vw - 60px))}
-	.wt-blogpost .b-text-c .tsd-perex{font-size:1.14em!important}
-}
+@media screen and (max-width:600px){.wt-blogpost .b-text-c .tsd-perex{font-size:1.14em!important}}
+.tsd-plno{max-width:680px;margin:0 auto;padding:34px 28px 30px;text-align:center;
+	background:#f2faf4;border:1px solid #bfe3c9;border-radius:14px;box-shadow:0 3px 16px rgba(30,70,45,.09)}
+.tsd-plno-znak{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:#dcf1e2;
+	color:var(--tsd-green);font-size:34px;line-height:64px;font-weight:700}
+.b-text-c .tsd-plno-t{margin:0 0 12px!important;font-size:1.65em!important;font-weight:700!important;color:var(--tsd-green)!important}
+.b-text-c .tsd-plno-s{margin:0 0 12px!important;font-size:1.08em!important;line-height:1.6!important;color:var(--tsd-ink)!important}
+.tsd-plno-box{margin:22px 0 18px;padding:16px 18px;text-align:left;background:#eef4fa;border-left:4px solid var(--tsd-accent);border-radius:8px}
+.b-text-c .tsd-plno-h{margin:0 0 8px!important;font-weight:700!important;color:var(--tsd-accent)!important;font-size:1.05em!important}
+.tsd-plno-box p{margin:0;line-height:1.65}
+.b-text-c .tsd-plno-note{margin:0!important;font-size:.95em!important;color:var(--tsd-muted)!important;line-height:1.6!important}
+@media screen and (max-width:600px){.tsd-plno{padding:24px 16px 22px}.b-text-c .tsd-plno-t{font-size:1.35em!important}}
 </style>
 <script type="application/ld+json">
 {
@@ -258,7 +167,7 @@ body.l.wt-blogpost {
   "@type": "Offer",
   "price": "1000",
   "priceCurrency": "CZK",
-  "availability": "https://schema.org/InStock",
+  "availability": "https://schema.org/SoldOut",
   "validThrough": "2026-09-18",
   "url": "https://www.taborslapanice.cz/l/podzimni-vikendovka-cucice-2026/"
  },
@@ -468,7 +377,7 @@ body.l.wt-blogpost {
 
 		<h3 class="tsd-h">Co s sebou k předání dětí</h3>
 		<p>U předání dětí mějte prosím připravené: <strong class="tsd-hl">2 jízdenky na trolejbus do Brna</strong>, <strong class="tsd-hl">kartičku pojištěnce</strong> nebo její kopii a <strong class="tsd-hl">léky</strong>, které vaše dítě užívá.</p>
-		<p>Dejte nám prosím vědět s předstihem o <strong class="tsd-hl">potravinových dietách nebo alergiích</strong> — můžete je rovnou vyplnit do přihlášky níže.</p>
+		<p>O <strong class="tsd-hl">potravinových dietách nebo alergiích</strong> nám prosím dejte vědět s předstihem.</p>
 
 		<h3 class="tsd-h">Kontakt</h3>
 		<p>Při jakýchkoliv dotazech pište, volejte:<br>
@@ -480,146 +389,16 @@ body.l.wt-blogpost {
 
 <div class="b b-text cf">
 	<div class="b-c b-text-c b-s b-s-t60 b-s-b60 b-cs cf">
-		<div id="prihlaska" class="tsd-form-wrap">
-			<div class="tsd-form-head">
-				<h2 class="tsd-form-title">Online přihláška (návratka)</h2>
-				<p class="tsd-lead">Podzimní víkend Čučice <strong class="tsd-hl">2. – 4. 10. 2026</strong></p>
-				<p class="tsd-deadline">Přihlášku prosím odešlete nejpozději do <strong class="tsd-hl-hot">pátku 18. 9. 2026</strong>. Když se nahlásí dostatečný počet dětí, včas zašleme bližší informace k odjezdu a platbě. Děkujeme!</p>
+		<div id="prihlaska" class="tsd-plno">
+			<div class="tsd-plno-znak">✓</div>
+			<h2 class="tsd-plno-t">Máme plno, děkujeme!</h2>
+			<p class="tsd-plno-s">Podzimní víkendovka <strong>Čučice 2. – 4. 10. 2026</strong> je obsazená a přihlášky už nepřijímáme.</p>
+			<p class="tsd-plno-s">Moc děkujeme za zájem — sešlo se vás tolik, že je kapacita plná. <strong>Moc se na všechny těšíme!</strong></p>
+			<div class="tsd-plno-box">
+				<p class="tsd-plno-h">Přihlášeným rodičům</p>
+				<p>Bližší informace k odjezdu a platbě vám pošleme e-mailem. Kdyby vám nic nepřišlo nebo se něco změnilo, ozvěte se prosím <strong>Zuzaně Hlinové</strong> — tel. <a href="tel:+420731507034">731 507 034</a>, <a href="mailto:vikendovky@taborslapanice.cz">vikendovky@taborslapanice.cz</a>.</p>
 			</div>
-
-			<div id="tsd-error" class="tsd-alert tsd-alert-err" hidden>
-				<strong>Přihlášku se nepodařilo odeslat.</strong>
-				<span id="tsd-error-detail"></span>
-				<span>Zkuste to prosím ještě jednou. Kdyby to nešlo ani napodruhé, napište na vikendovky@taborslapanice.cz nebo zavolejte Zuzaně Hlinové na 731 507 034 – přihlásíme dítě za vás.</span>
-			</div>
-
-			<div id="tsd-success" class="tsd-alert tsd-alert-ok" hidden>
-				<strong>Přihláška byla odeslána. Děkujeme!</strong>
-				<span>Ozveme se vám na uvedený e-mail. Pokud vám do pár dní nepřijde žádná odpověď, dejte nám prosím vědět na vikendovky@taborslapanice.cz.</span>
-				<span>Potřebujete přihlásit ještě někoho dalšího? Formulář se vám znovu otevře prázdný.</span>
-				<button type="button" id="tsd-znovu" class="tsd-btn tsd-btn-znovu">Odeslat další přihlášku</button>
-			</div>
-
-			<noscript>
-				<p class="tsd-alert tsd-alert-warn"><strong>Online přihláška potřebuje zapnutý JavaScript.</strong>
-				<span>Stáhněte si prosím <a href="../../pdfs/podzimni-vikendovka-cucice-2026.pdf">návratku v PDF</a> a pošlete ji na vikendovky@taborslapanice.cz, nebo zavolejte Zuzaně Hlinové na 731 507 034.</span></p>
-			</noscript>
-			<form id="tsd-prihlaska" class="tsd-form" action="https://formsubmit.co/vikendovky@taborslapanice.cz" method="POST">
-				<input type="hidden" name="_subject" value="Přihláška – Podzimní víkendovka Čučice 2.–4. 10. 2026">
-				<input type="hidden" name="_template" value="table">
-				<input type="hidden" name="Pro rodiče" value="Toto je kopie vaší přihlášky pouze pro kontrolu údajů. Na tento e-mail neodpovídejte – nikdo ho nečte. Potřebujete-li něco upřesnit nebo opravit, napište na vikendovky@taborslapanice.cz nebo volejte 731 507 034.">
-				<input type="hidden" name="Akce" value="Podzimní víkendovka Čučice 2. - 4. 10. 2026">
-				<input type="hidden" name="Počet dětí" id="tsd-pocet-deti" value="1">
-				<input type="hidden" name="_cc" id="tsd-cc" value="">
-				<input type="hidden" name="_autoresponse" id="tsd-autoresponse" value="Děkujeme za přihlášku na Podzimní víkendovku Čučice 2. – 4. 10. 2026. Ozveme se vám s bližšími informacemi k odjezdu a platbě.">
-				<input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-
-				<div id="tsd-deti"></div>
-
-				<div class="tsd-add-wrap">
-					<button type="button" id="tsd-add-child" class="tsd-btn tsd-btn-add">+ Přidat další dítě</button>
-					<span class="tsd-add-note">Máte na akci víc dětí? Přidejte je sem, stačí jedna přihláška.</span>
-				</div>
-
-				<fieldset class="tsd-fieldset">
-					<legend>Rodič / zákonný zástupce</legend>
-					<div class="tsd-row">
-						<label class="tsd-field">
-							<span class="tsd-label">Jméno a příjmení rodiče <b>*</b></span>
-							<input type="text" name="Jméno a příjmení rodiče" required autocomplete="name">
-							<span class="tsd-hint">Kdo přihlášku vyplňuje / zákonný zástupce.</span>
-						</label>
-						<label class="tsd-field">
-							<span class="tsd-label">Telefonní číslo rodiče <b>*</b></span>
-							<input type="tel" name="Telefon rodiče" required autocomplete="tel" placeholder="+420 123 456 789">
-						</label>
-					</div>
-					<div class="tsd-row">
-						<label class="tsd-field">
-							<span class="tsd-label">E-mail rodiče <b>*</b></span>
-							<input type="email" name="email" required autocomplete="email" placeholder="jmeno@email.cz">
-							<span class="tsd-hint">Na tuto adresu vám pošleme bližší informace k odjezdu a platbě.</span>
-						</label>
-						<label class="tsd-field">
-							<span class="tsd-label">Náhradní kontakt (telefon)</span>
-							<input type="tel" name="Náhradní kontakt" autocomplete="off" placeholder="nepovinné">
-						</label>
-					</div>
-				</fieldset>
-
-				<fieldset class="tsd-fieldset">
-					<legend>Poznámky</legend>
-					<label class="tsd-field">
-						<span class="tsd-label">Poznámky pro vedoucí</span>
-						<textarea name="Poznámky" rows="4" placeholder="Cokoliv, co bychom měli vědět – pozdější příjezd, dotaz k platbě, kamarád na pokoj…"></textarea>
-					</label>
-				</fieldset>
-
-				<label class="tsd-check">
-					<input type="checkbox" name="Souhlas se zpracováním údajů" value="Ano" required>
-					<span>Přihlašuji uvedené dítě / děti na akci a souhlasím se zpracováním uvedených osobních údajů pro účely organizace této akce. Podrobnosti najdete v <a href="../../zasady-ochrany-osobnich-udaju/index.html" target="_blank" rel="noopener">zásadách zpracování osobních údajů</a>. <b>*</b></span>
-				</label>
-
-				<div class="tsd-actions">
-					<button type="submit" class="tsd-btn">Odeslat přihlášku</button>
-				</div>
-				<p class="tsd-note">Přihláška se odešle na e-mail <strong class="tsd-key">vikendovky@taborslapanice.cz</strong> a kopii dostanete i vy. Pole označená <b>*</b> jsou povinná.</p>
-			</form>
-
-			<template id="tsd-child-tpl">
-				<fieldset class="tsd-fieldset tsd-child">
-					<legend>
-						<span class="tsd-child-title">1. dítě</span>
-						<button type="button" class="tsd-child-remove" title="Odebrat dítě">✕ odebrat</button>
-					</legend>
-					<div class="tsd-row">
-						<label class="tsd-field">
-							<span class="tsd-label">Jméno a příjmení dítěte <b>*</b></span>
-							<input type="text" data-field="jméno a příjmení" required autocomplete="off">
-						</label>
-						<div class="tsd-field">
-							<span class="tsd-label">Datum narození dítěte <b>*</b></span>
-							<div class="tsd-datefield">
-								<input type="text" class="tsd-date-input" data-field="datum narození" required
-									placeholder="dd. mm. rrrr" inputmode="numeric" autocomplete="off"
-									pattern="\s*\d{1,2}\.\s*\d{1,2}\.\s*\d{4}\s*">
-								<button type="button" class="tsd-date-btn" aria-label="Otevřít kalendář" aria-expanded="false">📅</button>
-							</div>
-							<span class="tsd-hint">Napište např. 12. 4. 2015, nebo vyberte v kalendáři.</span>
-						</div>
-					</div>
-					<label class="tsd-field">
-						<span class="tsd-label">Alergie a potravinové diety</span>
-						<textarea data-field="alergie a diety" rows="2" placeholder="Např. bezlepková dieta, alergie na ořechy… Pokud nic, nechte prázdné."></textarea>
-					</label>
-					<label class="tsd-field">
-						<span class="tsd-label">Léky, které dítě užívá (a dávkování)</span>
-						<textarea data-field="léky a dávkování" rows="2" placeholder="Název léku, kdy a kolik se podává."></textarea>
-					</label>
-					<label class="tsd-field">
-						<span class="tsd-label">Další zdravotní omezení</span>
-						<textarea data-field="další zdravotní omezení" rows="2" placeholder="Např. astma, epilepsie, pohybové omezení…"></textarea>
-					</label>
-					<div class="tsd-row">
-						<label class="tsd-field">
-							<span class="tsd-label">Plavec / neplavec</span>
-							<select data-field="plavec">
-								<option value="">— vyberte —</option>
-								<option value="Plavec">Plavec</option>
-								<option value="Neplavec">Neplavec</option>
-							</select>
-						</label>
-						<label class="tsd-field">
-							<span class="tsd-label">Může odejít samo?</span>
-							<select data-field="samostatný odchod">
-								<option value="">— vyberte —</option>
-								<option value="Ne – předám a vyzvednu dítě osobně">Ne – předám a vyzvednu osobně</option>
-								<option value="Ano – dítě může odejít samo">Ano – může odejít samo</option>
-							</select>
-						</label>
-					</div>
-				</fieldset>
-			</template>
+			<p class="tsd-plno-note">Nestihli jste to? Nevadí — další víkendovku chystáme a dáme o ní vědět tady i na Facebooku.</p>
 		</div>
 	</div>
 </div><div class="b-img b-img-default b b-s cf wnd-orientation-landscape wnd-type-image img-s-n" style="margin-left:9.11%;margin-right:9.11%;">
@@ -717,390 +496,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script>
-(function () {
-	var form = document.getElementById('tsd-prihlaska');
-	if (!form) return;
-
-	var MESICE = ['leden', 'únor', 'březen', 'duben', 'květen', 'červen',
-		'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'];
-	var DNY = ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'];
-
-	/* ================= Český kalendář pro datum narození ================= */
-
-	// "12. 4. 2015" / "12.4.2015" -> Date, jinak null
-	function parseCz(text) {
-		var m = /^\s*(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})\s*$/.exec(text || '');
-		if (!m) return null;
-		var d = +m[1], mes = +m[2], r = +m[3];
-		var dt = new Date(r, mes - 1, d);
-		if (dt.getFullYear() !== r || dt.getMonth() !== mes - 1 || dt.getDate() !== d) return null;
-		return dt;
-	}
-
-	function formatCz(dt) {
-		return dt.getDate() + '. ' + (dt.getMonth() + 1) + '. ' + dt.getFullYear();
-	}
-
-	function initDatePicker(input) {
-		if (input.dataset.tsdCal === '1') return;
-		input.dataset.tsdCal = '1';
-
-		var field = input.closest('.tsd-datefield');
-		var btn = field.querySelector('.tsd-date-btn');
-		var cal = null;
-		// zobrazený měsíc; u dítěte začínáme před 10 lety, ať se nemusí dlouho listovat
-		var view = new Date(new Date().getFullYear() - 10, 0, 1);
-
-		var letosMax = new Date().getFullYear();
-		var letosMin = letosMax - 25;
-
-		function build() {
-			cal = document.createElement('div');
-			cal.className = 'tsd-cal';
-			cal.hidden = true;
-
-			var head = document.createElement('div');
-			head.className = 'tsd-cal-head';
-
-			var prev = document.createElement('button');
-			prev.type = 'button'; prev.className = 'tsd-cal-nav';
-			prev.textContent = '‹'; prev.setAttribute('aria-label', 'Předchozí měsíc');
-
-			var selM = document.createElement('select');
-			selM.setAttribute('aria-label', 'Měsíc');
-			MESICE.forEach(function (name, i) {
-				var o = document.createElement('option');
-				o.value = i; o.textContent = name;
-				selM.appendChild(o);
-			});
-
-			var selR = document.createElement('select');
-			selR.setAttribute('aria-label', 'Rok');
-			for (var r = letosMax; r >= letosMin; r--) {
-				var o2 = document.createElement('option');
-				o2.value = r; o2.textContent = r;
-				selR.appendChild(o2);
-			}
-
-			var next = document.createElement('button');
-			next.type = 'button'; next.className = 'tsd-cal-nav';
-			next.textContent = '›'; next.setAttribute('aria-label', 'Další měsíc');
-
-			head.appendChild(prev); head.appendChild(selM); head.appendChild(selR); head.appendChild(next);
-
-			var grid = document.createElement('div');
-			grid.className = 'tsd-cal-grid';
-
-			var foot = document.createElement('div');
-			foot.className = 'tsd-cal-foot';
-			var close = document.createElement('button');
-			close.type = 'button'; close.className = 'tsd-cal-close'; close.textContent = 'Zavřít';
-			foot.appendChild(close);
-
-			cal.appendChild(head); cal.appendChild(grid); cal.appendChild(foot);
-			field.appendChild(cal);
-
-			prev.addEventListener('click', function () { view.setMonth(view.getMonth() - 1); render(); });
-			next.addEventListener('click', function () { view.setMonth(view.getMonth() + 1); render(); });
-			selM.addEventListener('change', function () { view.setMonth(+selM.value); render(); });
-			selR.addEventListener('change', function () { view.setFullYear(+selR.value); render(); });
-			close.addEventListener('click', function () { hide(); input.focus(); });
-
-			cal._selM = selM; cal._selR = selR; cal._grid = grid;
-		}
-
-		function render() {
-			var grid = cal._grid;
-			grid.innerHTML = '';
-
-			cal._selM.value = view.getMonth();
-			if (view.getFullYear() >= letosMin && view.getFullYear() <= letosMax) {
-				cal._selR.value = view.getFullYear();
-			}
-
-			DNY.forEach(function (d) {
-				var c = document.createElement('div');
-				c.className = 'tsd-cal-dow'; c.textContent = d;
-				grid.appendChild(c);
-			});
-
-			var rok = view.getFullYear(), mes = view.getMonth();
-			// pondělí = 0
-			var prvni = (new Date(rok, mes, 1).getDay() + 6) % 7;
-			var pocet = new Date(rok, mes + 1, 0).getDate();
-			var vybrane = parseCz(input.value);
-
-			for (var i = 0; i < prvni; i++) {
-				var e = document.createElement('button');
-				e.type = 'button'; e.className = 'tsd-cal-day is-empty'; e.tabIndex = -1;
-				grid.appendChild(e);
-			}
-			for (var d = 1; d <= pocet; d++) {
-				var b = document.createElement('button');
-				b.type = 'button'; b.className = 'tsd-cal-day'; b.textContent = d;
-				b.dataset.den = d;
-				if (vybrane && vybrane.getFullYear() === rok && vybrane.getMonth() === mes && vybrane.getDate() === d) {
-					b.className += ' is-sel';
-				}
-				b.addEventListener('click', function () {
-					var dt = new Date(view.getFullYear(), view.getMonth(), +this.dataset.den);
-					input.value = formatCz(dt);
-					input.dispatchEvent(new Event('input', { bubbles: true }));
-					hide();
-					input.focus();
-				});
-				grid.appendChild(b);
-			}
-		}
-
-		function show() {
-			if (!cal) build();
-			var cur = parseCz(input.value);
-			if (cur) view = new Date(cur.getFullYear(), cur.getMonth(), 1);
-			render();
-			cal.hidden = false;
-			btn.setAttribute('aria-expanded', 'true');
-		}
-
-		function hide() {
-			if (cal) cal.hidden = true;
-			btn.setAttribute('aria-expanded', 'false');
-		}
-
-		btn.addEventListener('click', function (e) {
-			e.preventDefault();
-			// zavři ostatní otevřené kalendáře
-			Array.prototype.forEach.call(document.querySelectorAll('.tsd-cal'), function (c) {
-				if (c !== cal) c.hidden = true;
-			});
-			if (cal && !cal.hidden) { hide(); } else { show(); }
-		});
-
-		document.addEventListener('click', function (e) {
-			if (cal && !cal.hidden && !field.contains(e.target)) hide();
-		});
-		document.addEventListener('keydown', function (e) {
-			if (e.key === 'Escape' && cal && !cal.hidden) hide();
-		});
-
-		// po opuštění pole hezky srovnáme zápis (1.1.2015 -> 1. 1. 2015)
-		input.addEventListener('blur', function () {
-			var dt = parseCz(input.value);
-			if (dt) input.value = formatCz(dt);
-		});
-		input.addEventListener('input', function () {
-			var dt = parseCz(input.value);
-			input.setCustomValidity(input.value.trim() === '' || dt ? '' : 'Zadejte datum ve tvaru 12. 4. 2015.');
-		});
-	}
-
-	/* ===================== Více dětí ===================== */
-
-	var deti = document.getElementById('tsd-deti');
-	var tpl = document.getElementById('tsd-child-tpl');
-	var addBtn = document.getElementById('tsd-add-child');
-	var pocetInput = document.getElementById('tsd-pocet-deti');
-
-	function prejmenuj() {
-		var bloky = deti.querySelectorAll('.tsd-child');
-		Array.prototype.forEach.call(bloky, function (blok, i) {
-			var cislo = i + 1;
-			blok.querySelector('.tsd-child-title').textContent = cislo + '. dítě';
-			Array.prototype.forEach.call(blok.querySelectorAll('[data-field]'), function (f) {
-				f.name = 'Dítě ' + cislo + ' – ' + f.dataset.field;
-			});
-			blok.querySelector('.tsd-child-remove').hidden = (bloky.length === 1);
-		});
-		pocetInput.value = bloky.length;
-		addBtn.disabled = bloky.length >= 6;
-	}
-
-	function pridejDite(scroll) {
-		var blok = tpl.content.firstElementChild.cloneNode(true);
-		deti.appendChild(blok);
-		blok.querySelector('.tsd-child-remove').addEventListener('click', function () {
-			blok.remove();
-			prejmenuj();
-		});
-		initDatePicker(blok.querySelector('.tsd-date-input'));
-		prejmenuj();
-		if (scroll) {
-			blok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-			blok.querySelector('input[type=text]').focus({ preventScroll: true });
-		}
-	}
-
-	pridejDite(false);
-	addBtn.addEventListener('click', function () { pridejDite(true); });
-
-	/* ====== Shrnující e-mail, který dostane rodič ====== */
-
-	function sestavPredmet() {
-		var rodic = (form.elements['Jméno a příjmení rodiče'].value || '').trim();
-		var deti = [];
-		Array.prototype.forEach.call(deti_jmena(), function (v) { if (v) deti.push(v); });
-
-		var kdo = deti.length ? deti[0] : '';
-		if (deti.length === 2) { kdo = deti[0] + ' a ' + deti[1]; }
-		else if (deti.length > 2) { kdo = deti[0] + ' a další ' + (deti.length - 1); }
-
-		var predmet = 'Přihláška Čučice';
-		if (rodic) predmet += ' – ' + rodic;
-		if (kdo) predmet += ' (' + kdo + ')';
-		// rodič dostává tutéž zprávu v kopii, proto upozornění rovnou v předmětu
-		predmet += ' – kontrola údajů, neodpovídejte';
-		return predmet;
-	}
-
-	function deti_jmena() {
-		return Array.prototype.map.call(
-			deti.querySelectorAll('[data-field="jméno a příjmení"]'),
-			function (f) { return (f.value || '').trim(); }
-		);
-	}
-
-	function shrnutiProRodice() {
-		var out = [];
-		out.push('Dobrý den,');
-		out.push('');
-		out.push('děkujeme za přihlášku na PODZIMNÍ VÍKENDOVKU ČUČICE 2. – 4. 10. 2026.');
-		out.push('Takto jsme si zapsali vaše údaje:');
-		out.push('');
-
-		Array.prototype.forEach.call(deti.querySelectorAll('.tsd-child'), function (blok, i) {
-			out.push((i + 1) + '. DÍTĚ');
-			Array.prototype.forEach.call(blok.querySelectorAll('[data-field]'), function (f) {
-				var val = (f.value || '').trim();
-				if (!val) return;
-				var popis = f.dataset.field.charAt(0).toUpperCase() + f.dataset.field.slice(1);
-				out.push('   ' + popis + ': ' + val);
-			});
-			out.push('');
-		});
-
-		out.push('RODIČ / ZÁKONNÝ ZÁSTUPCE');
-		[['Jméno a příjmení rodiče', 'Jméno a příjmení'],
-		 ['Telefon rodiče', 'Telefon'],
-		 ['email', 'E-mail'],
-		 ['Náhradní kontakt', 'Náhradní kontakt']].forEach(function (par) {
-			var pole = form.elements[par[0]];
-			if (pole && pole.value.trim()) out.push('   ' + par[1] + ': ' + pole.value.trim());
-		});
-		out.push('');
-
-		var pozn = form.elements['Poznámky'];
-		if (pozn && pozn.value.trim()) {
-			out.push('POZNÁMKY');
-			out.push('   ' + pozn.value.trim());
-			out.push('');
-		}
-
-		out.push('CO BUDE DÁL');
-		out.push('   Až se nahlásí dostatečný počet dětí, pošleme vám bližší informace');
-		out.push('   k odjezdu a platbě.');
-		out.push('');
-		out.push('   Cena: 1 000 Kč (doprava tam a zpět, ubytování, strava)');
-		out.push('   Odjezd: pátek 2. 10. 2026, Zastávka Šlapanice Sídliště');
-		out.push('   Příjezd: neděle 4. 10. 2026, Zastávka Šlapanice Sídliště');
-		out.push('   Časy upřesníme.');
-		out.push('');
-		out.push('   K předání dítěte prosím připravte 2 jízdenky na trolejbus do Brna,');
-		out.push('   kartičku pojištěnce (nebo její kopii) a léky, které dítě užívá.');
-		out.push('');
-		out.push('Pokud je v přehledu chyba, dejte nám prosím vědět:');
-		out.push('Zuzana Hlinová, tel. 731 507 034, vikendovky@taborslapanice.cz');
-		out.push('');
-		out.push('Tábor šlapanických divadelníků');
-
-		return out.join('\n');
-	}
-
-	/* ====== Po odeslání: poděkování + možnost poslat další ====== */
-
-	var uspech = document.getElementById('tsd-success');
-	var wrap = document.getElementById('prihlaska');
-
-	function znovuOtevriFormular() {
-		if (uspech) uspech.hidden = true;
-		form.reset();
-		deti.innerHTML = '';
-		pridejDite(false);
-		form.style.display = '';
-		var btn = form.querySelector('button[type=submit]');
-		if (btn) { btn.disabled = false; btn.textContent = 'Odeslat přihlášku'; }
-		// ať se po obnovení stránky neukáže poděkování znovu
-		if (window.history && window.history.replaceState) {
-			window.history.replaceState(null, '', window.location.pathname + window.location.hash);
-		}
-		if (wrap) wrap.scrollIntoView();
-	}
-
-	if (/[?&]odeslano=1/.test(window.location.search)) {
-		if (uspech) uspech.hidden = false;
-		form.style.display = 'none';
-		if (wrap) wrap.scrollIntoView();
-	}
-
-	var znovuBtn = document.getElementById('tsd-znovu');
-	if (znovuBtn) znovuBtn.addEventListener('click', znovuOtevriFormular);
-
-	var chyba = document.getElementById('tsd-error');
-	var chybaDetail = document.getElementById('tsd-error-detail');
-
-	function ukazPodekovani() {
-		if (chyba) chyba.hidden = true;
-		if (uspech) uspech.hidden = false;
-		form.style.display = 'none';
-		if (wrap) wrap.scrollIntoView();
-	}
-
-	function ukazChybu(text) {
-		if (chybaDetail) chybaDetail.textContent = text || '';
-		if (chyba) chyba.hidden = false;
-		var btn = form.querySelector('button[type=submit]');
-		if (btn) { btn.disabled = false; btn.textContent = 'Odeslat přihlášku'; }
-		if (wrap) wrap.scrollIntoView();
-	}
-
-	// Odesíláme na pozadí, aby rodič zůstal na našich stránkách
-	// (přesměrování přes _next FormSubmit se zapnutou captchou ignoruje).
-	form.addEventListener('submit', function (e) {
-		e.preventDefault();
-
-		var auto = document.getElementById('tsd-autoresponse');
-		if (auto) auto.value = shrnutiProRodice();
-
-		// kopie přihlášky rodiči
-		var cc = document.getElementById('tsd-cc');
-		var mail = form.elements['email'];
-		if (cc && mail) cc.value = mail.value.trim();
-
-		// předmět se jménem rodiče a dětmi, ať je v schránce hned vidět, o koho jde
-		var predmet = form.elements['_subject'];
-		if (predmet) predmet.value = sestavPredmet();
-
-		var btn = form.querySelector('button[type=submit]');
-		if (btn) { btn.disabled = true; btn.textContent = 'Odesílám…'; }
-		if (chyba) chyba.hidden = true;
-
-		fetch('https://formsubmit.co/ajax/vikendovky@taborslapanice.cz', {
-			method: 'POST',
-			headers: { 'Accept': 'application/json' },
-			body: new FormData(form)
-		})
-			.then(function (r) { return r.json().catch(function () { return { success: r.ok }; }); })
-			.then(function (data) {
-				var ok = data && (data.success === true || data.success === 'true');
-				if (ok) { ukazPodekovani(); }
-				else { ukazChybu(data && data.message ? data.message : ''); }
-			})
-			.catch(function () {
-				ukazChybu('Nepodařilo se spojit se serverem – zkontrolujte prosím připojení k internetu.');
-			});
-	});
-})();
-</script>
 </body>
 
 </html>
