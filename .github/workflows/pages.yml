@@ -25,6 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Editor webu a šablony jsou jen pomůcky pro úpravy, na web nepatří.
+      - name: Remove editing tools from the published site
+        run: rm -rf _editor _sablony "Upravit web.command"
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

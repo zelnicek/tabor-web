@@ -1,0 +1,4 @@
+# Python a dočasné soubory editoru webu
+__pycache__/
+*.pyc
+*.ed-tmp

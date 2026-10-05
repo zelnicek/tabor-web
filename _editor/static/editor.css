@@ -1,0 +1,105 @@
+/* Editor webu – zvýraznění upravitelných míst.
+   Tenhle soubor vkládá jen lokální editor, na zveřejněném webu není. */
+
+[data-ed]:not([data-ed-lock]),
+[data-ed-new] {
+	cursor: text;
+	border-radius: 3px;
+	transition: outline-color .15s, box-shadow .15s, background-color .15s;
+}
+[data-ed]:not([data-ed-lock]):hover,
+[data-ed-new]:hover {
+	outline: 2px dashed rgba(15, 108, 182, .55) !important;
+	outline-offset: 3px;
+}
+[data-ed]:not([data-ed-lock]):focus,
+[data-ed-new]:focus {
+	outline: 2px solid #0f6cb6 !important;
+	outline-offset: 3px;
+	background-color: rgba(15, 108, 182, .05);
+}
+
+/* neuložené změny */
+[data-ed][data-ed-dirty],
+[data-ed-new] {
+	box-shadow: 0 0 0 4px rgba(250, 204, 21, .75) !important;
+}
+[data-ed-box][data-ed-dirty] {
+	outline: 2px dashed rgba(234, 179, 8, .9) !important;
+	outline-offset: 8px;
+}
+[data-ed-new]:empty::before {
+	content: "Piš sem…";
+	opacity: .45;
+}
+
+/* zamčené (menu, patička, odpočet…) */
+[data-ed-lock] {
+	cursor: not-allowed;
+}
+[data-ed-lock]:hover {
+	outline: 2px dotted rgba(120, 130, 140, .55) !important;
+	outline-offset: 3px;
+}
+
+/* fotky */
+[data-ed-img] {
+	cursor: pointer;
+}
+[data-ed-img]:hover {
+	outline: 3px solid #0f6cb6 !important;
+	outline-offset: -3px;
+}
+[data-ed-img][data-ed-dirty] {
+	outline: 3px solid #eab308 !important;
+	outline-offset: -3px;
+}
+
+/* skryté prvky (např. vyskakovací okno) editor ukáže přímo ve stránce */
+[data-ed-reveal] {
+	position: relative !important;
+	inset: auto !important;
+	top: auto !important;
+	right: auto !important;
+	bottom: auto !important;
+	left: auto !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	transform: none !important;
+	z-index: auto !important;
+	margin: 40px 0 !important;
+	padding-top: 44px !important;
+	outline: 3px dashed #c026d3 !important;
+	outline-offset: -3px;
+}
+[data-ed-reveal]::before {
+	content: "Skryté okno – návštěvníkům se zobrazuje jen někdy (např. vyskakovací oznámení na úvodní stránce)";
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	right: 10px;
+	padding: 4px 10px;
+	background: #c026d3;
+	color: #fff;
+	font: 600 12px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+	border-radius: 5px;
+	text-align: left;
+	z-index: 1;
+}
+
+/* sbalené části (rozbalovačky) – v editoru jsou otevřené, aby šly upravit */
+[data-ed-unfold="display"] {
+	display: block !important;
+}
+[data-ed-unfold] {
+	height: auto !important;
+	max-height: none !important;
+	overflow: visible !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+}
+
+/* místo pro dolní lištu editoru */
+html body {
+	padding-bottom: 120px !important;
+}
